@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #000011;
+  --color-teal: #00c0b5;
+  --color-teal-dim: #01968f;
+  --color-teal-glow: rgba(0, 192, 181, 0.15);
+  --color-white: #ffffff;
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-gradient-1: #bbc446;
+  --color-gradient-2: #00c0b5;
+  --color-gradient-3: #ff00e1;
+  --color-gradient-4: #1f1b9f;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --font-heading: "JetBrains Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000011;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  cursor: none;
+  user-select: none;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--color-teal-glow), 0 0 40px var(--color-teal-glow); }
+  50% { box-shadow: 0 0 30px var(--color-teal-glow), 0 0 60px var(--color-teal-glow); }
+}

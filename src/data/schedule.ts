@@ -1,0 +1,381 @@
+export interface ScheduleItem {
+  id: number;
+  code?: string;
+  title: string;
+  abstract?: string;
+  speakerCodes: string[];
+  start: string; // ISO datetime
+  end: string; // ISO datetime
+  duration: number; // minutes
+  isBreak: boolean;
+}
+
+export const schedule: ScheduleItem[] = [
+  // === Day 1: February 12, 2026 ===
+  {
+    id: 1412204,
+    code: "WUXY3U",
+    title: "Community in the Age of AI",
+    abstract:
+      "As we open Robocon 2026 here in Helsinki, we\u2019ll start by celebrating what makes this gathering unique \u2014 people.",
+    speakerCodes: ["FQJRHW"],
+    start: "2026-02-12T07:00:00Z",
+    end: "2026-02-12T07:30:00Z",
+    duration: 40,
+    isBreak: false,
+  },
+  {
+    id: 1412205,
+    code: "WN3YC8",
+    title: "The RoboCon Effect And The Power Of Contributing",
+    abstract:
+      "RoboCon is more than just an yearly event - it is a spark for inspiration and development.\r\nIt ignites ideas, encourages perspectives and creates space for both personal and professional growth.\r\nIn this talk we share our story: how attending the conference lit that spark for us and how it led to be contributors in the community.\r\nWe'll reflect on the impact of being involved and why your voice matters!\r\nEveryone has something valuable to offer and we'll explore how you can take part, no matter your background or experience.",
+    speakerCodes: ["MBVEDS", "L8FQEP"],
+    start: "2026-02-12T07:30:00Z",
+    end: "2026-02-12T08:00:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412206,
+    code: "YA3UGX",
+    title: "Let\u2019s play a game!",
+    abstract:
+      "Yuri will present the gamification plans of the conference, how to participate, and how to make the most out of the conference.",
+    speakerCodes: ["GZRASZ"],
+    start: "2026-02-12T08:00:00Z",
+    end: "2026-02-12T08:10:00Z",
+    duration: 10,
+    isBreak: false,
+  },
+  {
+    id: 1412207,
+    title: "Breakfast",
+    speakerCodes: [],
+    start: "2026-02-12T08:10:00Z",
+    end: "2026-02-12T08:50:00Z",
+    duration: 40,
+    isBreak: true,
+  },
+  {
+    id: 1412208,
+    code: "GDQVZ7",
+    title: "RF-MCP: Say It, Test It, Ship It",
+    abstract:
+      "**Write plain English \u2192 Get executable Robot Framework tests**\r\n\r\nRF-MCP executes every step in real RF runtime before generating code. No hallucinated keywords - AI only uses keywords from your libraries.\r\n\r\n**Features:**\r\n- Natural language becomes working tests\r\n- Debug with actual RF error messages\r\n- Generate suites from validated steps\r\n- Works with Selenium/Appium/Browser/custom libraries\r\n- Smart DOM filtering & session management\r\n\r\nFor engineers wanting faster test creation without losing control over what gets generated.",
+    speakerCodes: ["T7BUER"],
+    start: "2026-02-12T08:50:00Z",
+    end: "2026-02-12T09:20:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412209,
+    code: "QBUZ7N",
+    title: "Can AI help us to find bugs in Robot Framework faster?",
+    abstract:
+      "Learn how I sped up the Robot Framework\u2019s test suite to find \u2154 of the bugs in \u00bc of the time!\r\n\r\nWe want to run our tests as often and early as possible, so we immediately notice when we break something. However, many teams can't test as often as they'd like because their tests take hours or even days to run.\r\n\r\nInnovative testing methods can identify most errors with just a fraction of test execution time, thereby significantly accelerating our testing. I\u2019ll show you how to use AI to find most bugs in a fraction of the test runtime. With this we can give feedback on new bugs much more frequently.",
+    speakerCodes: ["DBJYAY"],
+    start: "2026-02-12T09:20:00Z",
+    end: "2026-02-12T09:50:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412210,
+    title: "Elevator Pitch Competition by our Sponsors",
+    speakerCodes: [],
+    start: "2026-02-12T09:50:00Z",
+    end: "2026-02-12T10:00:00Z",
+    duration: 10,
+    isBreak: true,
+  },
+  {
+    id: 1412211,
+    title: "Coffee Break",
+    speakerCodes: [],
+    start: "2026-02-12T10:00:00Z",
+    end: "2026-02-12T10:15:00Z",
+    duration: 15,
+    isBreak: true,
+  },
+  {
+    id: 1412212,
+    code: "HVM3EQ",
+    title:
+      "Bringing Robot Framework to Aerospace: Traceable Automation in Space Projects",
+    abstract:
+      "Robot Framework is widely used for web/app testing\u2014but what about aerospace? In this talk, I\u2019ll show how we applied RF in satellite data-processing projects under strict traceability and standards. By linking DOORS requirements with test scripts and auto-generating deliverables, we ensure compliance, consistency, and full auditability. Learn how disciplined automation can thrive in regulated engineering domains and inspire new possibilities beyond conventional use cases. An Operational project (Galileo) will be presented.",
+    speakerCodes: ["NLASA3", "BERYGV"],
+    start: "2026-02-12T10:15:00Z",
+    end: "2026-02-12T10:45:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412213,
+    code: "VSG33S",
+    title:
+      "Locust Script Generation and Running with Correlation using Robot Framework",
+    abstract:
+      "Accelerate performance testing with Locust Script Generation and Execution via Robot Framework \u2014 an automated, keyword-driven approach to create, parameterize, and run scalable load tests. Seamlessly handle dynamic correlation, and generate detailed performance reports \u2014 empowering QA teams to validate APIs and user journeys with zero manual scripting and maximum reusability.",
+    speakerCodes: ["TU8YPQ", "H9BS8G"],
+    start: "2026-02-12T10:45:00Z",
+    end: "2026-02-12T11:15:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412214,
+    title: "Lunch Break",
+    speakerCodes: [],
+    start: "2026-02-12T11:15:00Z",
+    end: "2026-02-12T12:35:00Z",
+    duration: 80,
+    isBreak: true,
+  },
+  {
+    id: 1412215,
+    code: "KPTQL8",
+    title: 'Automated Accessibilty for "Very Busy" Teams',
+    abstract:
+      "Studies reveal that over 90% of the top 1 million websites have detectable accessibility issues. Despite its importance, accessibility testing is often neglected. This is primarily because teams do not have enough bandwidth, budget, domain knowledge & technical skills to deliver an accessible product within available timeframes.\r\nThis is where an automated approach towards accessibility can greatly help. This session will discuss how we addressed aforementioned challenges through Robot Framework & axe-core together & saved the day against all odds.",
+    speakerCodes: ["9PALK9", "DGQLUG"],
+    start: "2026-02-12T12:35:00Z",
+    end: "2026-02-12T13:05:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412216,
+    code: "CRKKBQ",
+    title:
+      "Automation with Image Recognition Libraries - SikuliLibrary (and ImageHorizonLibrary)",
+    abstract:
+      "This talk, is about using image recognition libraries to automate tasks or testing, when it is costly or difficult to obtain object identifiers in the applications under test.\r\nWe will talk about the libraries [SikuliLibrary](https://marketsquare.github.io/robotframework-SikuliLibrary/) and [ImageHorizonLibrary](https://github.com/eficode/robotframework-imagehorizonlibrary/) to answer these questions:\r\nWhat, Why, Where, When, and How to use them?\r\n\r\nContents:\r\n- About Image Recognition Libraries - SikuliLibrary and ImageHorizonLibrary\r\n- Future of SikuliLibrary",
+    speakerCodes: ["DYGBXQ"],
+    start: "2026-02-12T13:05:00Z",
+    end: "2026-02-12T13:35:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412217,
+    title: "Coffee Break / Afternoon treat\u200b",
+    speakerCodes: [],
+    start: "2026-02-12T13:35:00Z",
+    end: "2026-02-12T14:05:00Z",
+    duration: 30,
+    isBreak: true,
+  },
+  {
+    id: 1412218,
+    code: "TXYFYE",
+    title: "Integrating Robot Framework in your business strategy",
+    abstract:
+      "Like every open source tool Robot Framework is sometimes hard to fit in common corporate tool evaluations. There is no company behind it offering enterprise support. Even if governance for Robot Framework core may be achievable, the tool does not exist solely, but requires ecosystem projects that are entirely free.\r\n\r\nIn this talk, Markus is going to show ways how to mitigate the risks of adopting a free open source tool, how open source tool providers can improve governance of their prjects and how companies can contribute in different ways for their own direct benefit.",
+    speakerCodes: ["FJSLFM"],
+    start: "2026-02-12T14:05:00Z",
+    end: "2026-02-12T14:35:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412219,
+    code: "GW3DGD",
+    title: "Medusa: Resource-aware parallel suite execution made easy",
+    abstract:
+      '**Medusa is a tool to easily parallelize execution of test suites.**\r\n\r\nMedusa uses suite metadata to start suites in parallel dynamically while avoiding resource usage conflicts. Suites can be assigned to sequentially executed stages and can be run multiple times with different variables, even in parallel.\r\n\r\nThis talk will give you an overview of how Medusa works, how you can use it and how my employer [INSYS icom](https://insys-icom.com) uses it to save time and code for daily testing of the industrial routers we produce.',
+    speakerCodes: ["8NNBVZ"],
+    start: "2026-02-12T14:35:00Z",
+    end: "2026-02-12T15:05:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412220,
+    title: "Coffee Break\u200b",
+    speakerCodes: [],
+    start: "2026-02-12T15:05:00Z",
+    end: "2026-02-12T15:20:00Z",
+    duration: 15,
+    isBreak: true,
+  },
+  {
+    id: 1412221,
+    code: "GEN9TH",
+    title: "From Batter to Better: Pancakes as Testing",
+    abstract:
+      "Automation, like pancakes, can be delightful\u2026 if you follow the right process.\r\nJoin our live cooking session on stage where we'll bake two different recipes to get the same result: a delicious pancake.\r\nThere is much to learn about automation from the process of making pancakes.",
+    speakerCodes: ["FUKYZV", "9BRJUX"],
+    start: "2026-02-12T15:20:00Z",
+    end: "2026-02-12T15:50:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412222,
+    title: "Lightning Talk Voting",
+    speakerCodes: [],
+    start: "2026-02-12T15:50:00Z",
+    end: "2026-02-12T16:00:00Z",
+    duration: 10,
+    isBreak: true,
+  },
+  // === Day 2: February 13, 2026 ===
+  {
+    id: 1412223,
+    code: "N7BR3Q",
+    title: "Robot Framework Core Updates",
+    abstract:
+      "Kick off the second day with Robot Framework\u2019s lead developer, Pekka Kl\u00e4rck, as he shares the latest core updates and upcoming plans for the framework. Get a glimpse into what\u2019s new and what\u2019s next in the world of Robot Framework.",
+    speakerCodes: ["D3ZLT3"],
+    start: "2026-02-13T07:00:00Z",
+    end: "2026-02-13T07:30:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412224,
+    title: "Breakfast",
+    speakerCodes: [],
+    start: "2026-02-13T07:30:00Z",
+    end: "2026-02-13T08:15:00Z",
+    duration: 45,
+    isBreak: true,
+  },
+  {
+    id: 1412225,
+    code: "FW99HN",
+    title: "Bringing Robot Framework into n8n Visual Workflows",
+    abstract:
+      "Connecting Robot Framework to other systems often requires extra effort. What if you could do it visually, with workflows that react to events like a change on a website, an IoT sensor alert, or a new customer record in your database? This talk introduces n8n-nodes-robotframework, an n8n community node that runs Robot Framework inside visual workflows. Use it to connect Robot Framework\u2019s capabilities with prebuilt n8n nodes such as AI analysis, messaging, and database updates.",
+    speakerCodes: ["TGV7EW"],
+    start: "2026-02-13T08:15:00Z",
+    end: "2026-02-13T08:45:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412226,
+    code: "CTETXU",
+    title: "Climbing the Mountain: Our Journey We Couldn't Make Alone",
+    abstract:
+      'This session traces the four-year journey of the Nice Project QA team from initial Robot Framework adoption to global community building. Using a mountain-climbing metaphor, we reflect on the technical challenges of desktop automation and the pivotal role of international collaboration. We detail our evolution from attendees to "mountain guides" through initiatives like Wrobocon. Attendees will learn how a commitment to open-source communities drives technical excellence and sustainable growth in test automation.',
+    speakerCodes: ["BXEQAQ", "QBMFY7"],
+    start: "2026-02-13T08:45:00Z",
+    end: "2026-02-13T09:15:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412227,
+    title: "Coffee Break\u200b",
+    speakerCodes: [],
+    start: "2026-02-13T09:15:00Z",
+    end: "2026-02-13T09:30:00Z",
+    duration: 15,
+    isBreak: true,
+  },
+  {
+    id: 1412228,
+    code: "WTQCZD",
+    title: "What If Robot Framework Have a Brain",
+    abstract:
+      "This talk explores AI-driven automation in Robot Framework through an intelligent Agent that enhances testing with capabilities like Agent.Do and Agent.Check. By leveraging large language models and visual understanding, the Agent interprets test intentions, interacts with GUI elements, and performs visual assertions. It also explores how this can lead toward more autonomous test execution, where the Agent can understand and carry out complete testing goals through another keyword dedicated to this purpose.",
+    speakerCodes: ["XHAKK3", "ZBLE87"],
+    start: "2026-02-13T09:30:00Z",
+    end: "2026-02-13T10:00:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412229,
+    code: "V83LRV",
+    title:
+      "How AI tools affect learning and the implications on open source tools",
+    abstract:
+      "GenAI tools are changing the world of software development. Many enterprises report more code being generated with GenAI tools than not. As Robot Framework users, we are a part of the global software ecosystem, and the ecosystem is changing. What is our and the framework's future role in the world of increasing prompted development, and how does it affect our learning? I delve into how we learn programming, how learning and doing are starting to diverge in modern software development, and the implications of all of these.",
+    speakerCodes: ["GPBWYT"],
+    start: "2026-02-13T10:00:00Z",
+    end: "2026-02-13T10:30:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412230,
+    title: "Lunch",
+    speakerCodes: [],
+    start: "2026-02-13T10:30:00Z",
+    end: "2026-02-13T11:50:00Z",
+    duration: 80,
+    isBreak: true,
+  },
+  {
+    id: 1412231,
+    code: "TVENJA",
+    title: "Panel Discussion",
+    abstract:
+      "This is a panel discussion, hosted by Ren\u00e9 Rohner.\r\n\r\nWe will start with a fixed topic and panelists: Robot Framework and AI.\r\n\r\nAfter the first topic, we will pick up topics from the audience. The audience may suggest and up-vote topics in the event app. Moreover, anyone from the audience may join the panel, as we will have rotating seats!",
+    speakerCodes: ["8HSX9A", "HTDUSJ", "T7BUER", "8U3B3T", "D3ZLT3"],
+    start: "2026-02-13T11:50:00Z",
+    end: "2026-02-13T12:35:00Z",
+    duration: 45,
+    isBreak: false,
+  },
+  {
+    id: 1412232,
+    title: "Lightning Talks",
+    speakerCodes: [],
+    start: "2026-02-13T12:35:00Z",
+    end: "2026-02-13T13:20:00Z",
+    duration: 45,
+    isBreak: true,
+  },
+  {
+    id: 1412233,
+    title: "Coffee Break / Afternoon treat\u200b",
+    speakerCodes: [],
+    start: "2026-02-13T13:20:00Z",
+    end: "2026-02-13T13:40:00Z",
+    duration: 20,
+    isBreak: true,
+  },
+  {
+    id: 1412234,
+    code: "CHGHDP",
+    title:
+      "PlatynUI: Cross-Platform Desktop UI Automation for Robot Framework",
+    abstract:
+      "PlatynUI is an open-source Robot Framework library that makes desktop UI automation feel consistent on Windows, Linux, and macOS. The talk introduces what PlatynUI is, why it was created, and the ideas behind it\u2014portability across desktops, readable tests, and habits that reduce flakiness. We\u2019ll walk through a compact demo using the library\u2019s tooling to explore and interact with applications and outline how to try PlatynUI in existing suites without disruption.",
+    speakerCodes: ["RMY3KA"],
+    start: "2026-02-13T13:40:00Z",
+    end: "2026-02-13T14:10:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412235,
+    code: "WBDE37",
+    title: "From Zero to Senior: Growing a Career with Robot Framework",
+    abstract:
+      "**When I first started with Robot Framework, I had no idea what I was doing.** Over the years, those messy experiments turned into a career built on _curiosity, mistakes and learning._ In this talk, I\u2019ll share how that journey shaped me. From early tests to mentoring others and what I\u2019ve learned about growth, persistence and how boredom and failure can lead to better work.",
+    speakerCodes: ["UKYCUH"],
+    start: "2026-02-13T14:10:00Z",
+    end: "2026-02-13T14:40:00Z",
+    duration: 30,
+    isBreak: false,
+  },
+  {
+    id: 1412236,
+    code: "ZQLRYW",
+    title: "RoboCon Closing Celebration",
+    abstract:
+      "Join us for the RoboCon finale with prizes, appreciation, and a big thank-you to everyone who made this year\u2019s event a success.",
+    speakerCodes: ["JDRR8S", "HTDUSJ", "FQJRHW"],
+    start: "2026-02-13T14:40:00Z",
+    end: "2026-02-13T14:55:00Z",
+    duration: 20,
+    isBreak: false,
+  },
+];
