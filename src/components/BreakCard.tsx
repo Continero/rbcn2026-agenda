@@ -22,19 +22,24 @@ export function BreakCard({ item, progress, now, nextTalk }: BreakCardProps) {
           <BreakIcon />
           Now
         </span>
-        <span className="text-white-60 text-xl">
+        <span className="text-cyan-60 text-xl">
           {formatTime(item.start)} &ndash; {formatTime(item.end)}
         </span>
       </div>
 
       <ProgressBar progress={progress} />
 
-      <div className="rounded-2xl border border-white-10 px-12 py-10 flex flex-col items-center justify-center gap-5 bg-white/[0.02]">
+      <div className="border-l-4 border-cyan-30 rounded-r-xl px-12 py-10 flex flex-col items-center justify-center gap-5 bg-cyan/[0.02]">
         <span className="text-6xl">{getBreakEmoji(item.title)}</span>
-        <h2 className="text-3xl font-bold text-white/80">{item.title}</h2>
+        <h2
+          className="text-3xl font-bold text-cyan/80"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          {item.title}
+        </h2>
         {nextTalk && (
           <div className="text-center mt-2">
-            <p className="text-white-60 text-base">
+            <p className="text-cyan-60 text-base">
               Next up {timeUntilNext}
             </p>
             <p className="text-teal text-lg font-semibold mt-1">

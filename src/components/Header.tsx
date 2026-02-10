@@ -9,23 +9,23 @@ interface HeaderProps {
 
 export function Header({ now, dayLabel }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-5 px-20 pt-10 pb-8 border-b border-white-10 shrink-0">
+    <header className="flex flex-col gap-5 pt-10 pb-8 border-b border-cyan-10 shrink-0">
       {/* Top row: logo + title + day tabs */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <RoboConLogo />
-          <h1 className="text-3xl font-bold tracking-wider text-white uppercase">
+          <h1 className="text-3xl font-bold tracking-[0.15em] text-cyan uppercase" style={{ fontFamily: "var(--font-heading)" }}>
             RoboCon 2026
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <DayTab label="Day 1" active={dayLabel === "Day 1"} />
           <DayTab label="Day 2" active={dayLabel === "Day 2"} />
         </div>
       </div>
       {/* Bottom row: date + time, centered */}
-      <div className="flex items-center justify-center gap-4">
-        <span className="text-white-60 text-2xl">{formatCurrentDate(now)}</span>
+      <div className="flex items-center justify-center gap-5">
+        <span className="text-cyan-60 text-2xl">{formatCurrentDate(now)}</span>
         <span className="text-5xl font-bold text-teal tabular-nums tracking-wider">
           {formatCurrentTime(now)}
         </span>
@@ -40,7 +40,7 @@ function DayTab({ label, active }: { label: string; active: boolean }) {
       className={`px-10 py-2.5 text-lg font-medium rounded-full transition-colors ${
         active
           ? "bg-teal text-navy"
-          : "bg-white-10 text-white-60"
+          : "bg-cyan-10 text-cyan-60"
       }`}
     >
       {label}

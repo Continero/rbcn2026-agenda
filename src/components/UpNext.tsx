@@ -15,7 +15,10 @@ export function UpNext({ items }: UpNextProps) {
 
   return (
     <div className="flex flex-col gap-4 h-full">
-      <h3 className="text-base font-semibold uppercase tracking-[0.2em] text-white-60 shrink-0">
+      <h3
+        className="text-base font-semibold uppercase tracking-[0.2em] text-cyan-60 shrink-0"
+        style={{ fontFamily: "var(--font-heading)" }}
+      >
         Up Next
       </h3>
       <div className="flex flex-col flex-1 overflow-hidden">
@@ -24,7 +27,7 @@ export function UpNext({ items }: UpNextProps) {
         ))}
       </div>
       {items.length > 7 && (
-        <p className="text-white-30 text-base text-center shrink-0 mt-2">
+        <p className="text-cyan-30 text-base text-center shrink-0 mt-2">
           +{items.length - 7} more
         </p>
       )}
@@ -39,14 +42,14 @@ function UpNextItem({ item, isFirst }: { item: ScheduleItem; isFirst: boolean })
 
   return (
     <div
-      className={`py-4 border-b border-white/[0.06] last:border-b-0 ${
-        isFirst ? "bg-white/[0.03] rounded-lg px-5 -mx-5" : ""
+      className={`py-4 border-b border-cyan/[0.06] last:border-b-0 ${
+        isFirst ? "bg-cyan/[0.03] rounded-lg px-5 -mx-5" : ""
       }`}
     >
       <div className="flex items-start gap-5">
         <span
           className={`text-xl font-mono tabular-nums mt-0.5 shrink-0 w-16 ${
-            item.isBreak ? "text-white-30" : "text-teal"
+            item.isBreak ? "text-cyan-30" : "text-teal"
           }`}
         >
           {formatTime(item.start)}
@@ -55,19 +58,19 @@ function UpNextItem({ item, isFirst }: { item: ScheduleItem; isFirst: boolean })
           <p
             className={`text-xl leading-snug ${
               item.isBreak
-                ? "text-white-30 italic"
-                : "text-white/90 font-medium"
+                ? "text-cyan-30 italic"
+                : "text-cyan/90 font-medium"
             }`}
           >
             {item.title}
           </p>
           {!item.isBreak && itemSpeakers.length > 0 && (
-            <p className="text-base text-white/40 mt-1 truncate">
+            <p className="text-base text-cyan/40 mt-1 truncate">
               {itemSpeakers.map((s) => s.name).join(", ")}
             </p>
           )}
         </div>
-        <span className="text-base text-white-30 shrink-0 mt-1 tabular-nums">
+        <span className="text-base text-cyan-30 shrink-0 mt-1 tabular-nums">
           {item.duration}m
         </span>
       </div>

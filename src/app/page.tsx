@@ -68,7 +68,7 @@ function LiveView({
       </div>
 
       {/* Divider */}
-      <div className="shrink-0 h-px bg-white-10" />
+      <div className="shrink-0 h-px bg-cyan-10" />
 
       {/* Up Next */}
       <div className="flex-1 min-h-0 overflow-hidden">
@@ -97,7 +97,7 @@ function BeforeStart({
   return (
     <div className="flex-1 flex flex-col items-center gap-8">
       <div className="text-center py-10">
-        <h2 className="text-4xl font-bold text-white">
+        <h2 className="text-4xl font-bold text-cyan" style={{ fontFamily: "var(--font-heading)" }}>
           {dayLabel === "Day 1" ? "Welcome to RoboCon 2026!" : "Welcome back!"}
         </h2>
         {firstStart && (
@@ -120,14 +120,14 @@ function AfterEnd({ dayLabel }: { dayLabel: string }) {
     <div className="flex-1 flex flex-col items-center justify-center gap-6">
       {dayLabel === "Day 1" ? (
         <>
-          <h2 className="text-4xl font-bold text-white text-center">
+          <h2 className="text-4xl font-bold text-cyan text-center" style={{ fontFamily: "var(--font-heading)" }}>
             That&apos;s a wrap for Day 1!
           </h2>
           <p className="text-2xl text-teal">See you tomorrow for Day 2</p>
         </>
       ) : (
         <>
-          <h2 className="text-4xl font-bold text-white text-center">
+          <h2 className="text-4xl font-bold text-cyan text-center" style={{ fontFamily: "var(--font-heading)" }}>
             Thank you for attending RoboCon 2026!
           </h2>
           <p className="text-2xl text-teal">See you next year</p>
