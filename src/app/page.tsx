@@ -14,7 +14,7 @@ export default function Home() {
   const state = getScheduleState(schedule, now);
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-navy overflow-hidden items-center">
+    <div className="w-screen h-screen bg-navy overflow-hidden flex justify-center">
       <div className="w-[75%] h-full flex flex-col overflow-hidden">
       <Header now={now} dayLabel={state.dayLabel} />
 
