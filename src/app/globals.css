@@ -1,5 +1,16 @@
 @import "tailwindcss";
-@import url('https://fonts.cdnfonts.com/css/ocr-a-std');
+
+@font-face {
+  font-family: "OCR-RBCN";
+  src: url("/fonts/OCR-RBCN.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OCR-A";
+  src: url("/fonts/OCRA.woff2") format("woff2");
+  font-display: swap;
+}
 
 @theme inline {
   --color-navy: #000011;
@@ -19,7 +30,7 @@
   --color-gradient-3: #ff00e1;
   --color-gradient-4: #1f1b9f;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
-  --font-heading: "OCR A Std", "OCR A Extended", "JetBrains Mono", monospace;
+  --font-heading: "OCR-RBCN", "OCR-A", "JetBrains Mono", monospace;
 }
 
 * {
