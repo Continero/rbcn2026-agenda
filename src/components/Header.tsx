@@ -37,11 +37,12 @@ export function Header({ now, dayLabel }: HeaderProps) {
 function DayTab({ label, active }: { label: string; active: boolean }) {
   return (
     <span
-      className={`px-[15px] py-4 text-2xl font-bold rounded-full transition-colors ${
+      className={`py-4 text-2xl font-bold rounded-full transition-colors ${
         active
           ? "bg-teal text-navy"
           : "bg-cyan-10 text-cyan-60"
       }`}
+      style={{ paddingLeft: "15px", paddingRight: "15px" }}
     >
       {label}
     </span>
