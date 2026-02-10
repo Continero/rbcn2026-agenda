@@ -69,7 +69,7 @@ export function CurrentTalk({ item, progress }: CurrentTalkProps) {
         )}
 
         {item.abstract && (
-          <p className="text-base text-cyan-30 leading-relaxed line-clamp-2">
+          <p className="text-base text-cyan-30 leading-relaxed">
             {cleanAbstract(item.abstract)}
           </p>
         )}
