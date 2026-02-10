@@ -14,7 +14,8 @@ export default function Home() {
   const state = getScheduleState(schedule, now);
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-navy overflow-hidden">
+    <div className="w-screen h-screen flex flex-col bg-navy overflow-hidden items-center">
+      <div className="w-[75%] h-full flex flex-col overflow-hidden">
       <Header now={now} dayLabel={state.dayLabel} />
 
       <main className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 py-10 gap-10">
@@ -31,6 +32,7 @@ export default function Home() {
           <LiveView state={state} now={now} />
         )}
       </main>
+      </div>
     </div>
   );
 }
