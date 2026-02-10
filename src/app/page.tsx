@@ -49,7 +49,7 @@ function LiveView({
   return (
     <>
       {/* Current talk / break */}
-      <div className="min-h-0 overflow-hidden">
+      <div className="shrink-0 max-h-[45%] overflow-hidden">
         {state.currentItem && (
           state.currentItem.isBreak ? (
             <BreakCard
@@ -71,7 +71,7 @@ function LiveView({
       <div className="shrink-0 h-px bg-cyan-10" />
 
       {/* Up Next */}
-      <div className="flex-1 min-h-[30%] overflow-hidden">
+      <div className="flex-1 min-h-0 overflow-hidden">
         <UpNext items={state.upNext} />
       </div>
 

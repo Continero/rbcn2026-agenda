@@ -34,33 +34,33 @@ export function CurrentTalk({ item, progress }: CurrentTalkProps) {
       <ProgressBar progress={progress} />
 
       <div
-        className="border-l-4 border-teal rounded-r-xl px-12 py-10 flex flex-col gap-6"
+        className="border-l-4 border-teal rounded-r-xl px-10 py-6 flex flex-col gap-4"
         style={{
           background: "rgba(0, 192, 181, 0.04)",
         }}
       >
-        <h2 className="text-4xl font-bold leading-tight text-cyan" style={{ fontFamily: "var(--font-heading)" }}>
+        <h2 className="text-3xl font-bold leading-tight text-cyan" style={{ fontFamily: "var(--font-heading)" }}>
           {item.title}
         </h2>
 
         {itemSpeakers.length > 0 && (
-          <div className="flex items-center gap-6 flex-wrap">
+          <div className="flex items-center gap-5 flex-wrap">
             {itemSpeakers.map((speaker) => (
-              <div key={speaker.code} className="flex items-center gap-4">
+              <div key={speaker.code} className="flex items-center gap-3">
                 {speaker.avatar ? (
                   <Image
                     src={speaker.avatar}
                     alt={speaker.name}
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-teal/40 grayscale brightness-80"
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-teal/40 grayscale brightness-80"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-full bg-teal/20 flex items-center justify-center text-teal text-2xl font-bold">
+                  <div className="w-12 h-12 rounded-full bg-teal/20 flex items-center justify-center text-teal text-xl font-bold">
                     {speaker.name.charAt(0)}
                   </div>
                 )}
-                <span className="text-2xl text-cyan/90 font-medium">
+                <span className="text-xl text-cyan/90 font-medium">
                   {speaker.name}
                 </span>
               </div>
@@ -69,7 +69,7 @@ export function CurrentTalk({ item, progress }: CurrentTalkProps) {
         )}
 
         {item.abstract && (
-          <p className="text-lg text-cyan-30 leading-relaxed line-clamp-3">
+          <p className="text-base text-cyan-30 leading-relaxed line-clamp-2">
             {cleanAbstract(item.abstract)}
           </p>
         )}
