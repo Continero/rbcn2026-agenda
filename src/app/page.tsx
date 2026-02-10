@@ -70,13 +70,13 @@ function LiveView({
       {/* Divider */}
       <div className="shrink-0 h-px bg-cyan-10" />
 
-      {/* Bottom: Up Next + Past Talks share remaining space */}
-      <div className="flex-1 min-h-0 flex flex-col gap-6">
-        <div className="flex-1 min-h-0 overflow-hidden">
+      {/* Bottom: Up Next + Past Talks – grid ensures Past Talks always visible */}
+      <div className="flex-1 min-h-0 grid grid-rows-[minmax(0,1fr)_auto] gap-6 overflow-hidden">
+        <div className="overflow-hidden">
           <UpNext items={state.upNext} />
         </div>
         {state.past.length > 0 && (
-          <div className="shrink-0">
+          <div>
             <PastTalks items={state.past} />
           </div>
         )}
