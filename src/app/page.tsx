@@ -48,8 +48,8 @@ function LiveView({
 
   return (
     <>
-      {/* Current talk / break */}
-      <div className="shrink-0 max-h-[45%] overflow-hidden">
+      {/* Current talk / break - never clipped */}
+      <div className="shrink-0">
         {state.currentItem && (
           state.currentItem.isBreak ? (
             <BreakCard
@@ -70,14 +70,16 @@ function LiveView({
       {/* Divider */}
       <div className="shrink-0 h-px bg-cyan-10" />
 
-      {/* Up Next */}
-      <div className="flex-1 min-h-0 overflow-hidden">
-        <UpNext items={state.upNext} />
-      </div>
-
-      {/* Past talks */}
-      <div className="shrink-0">
-        <PastTalks items={state.past} />
+      {/* Bottom: Up Next + Past Talks share remaining space */}
+      <div className="flex-1 min-h-0 flex flex-col gap-6">
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <UpNext items={state.upNext} />
+        </div>
+        {state.past.length > 0 && (
+          <div className="shrink-0">
+            <PastTalks items={state.past} />
+          </div>
+        )}
       </div>
     </>
   );
