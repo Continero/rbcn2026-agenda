@@ -9,24 +9,26 @@ interface HeaderProps {
 
 export function Header({ now, dayLabel }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-5 pt-10 pb-8 border-b border-cyan-10 shrink-0">
+    <header className="flex flex-col gap-3 lg:gap-5 px-4 sm:px-6 lg:px-0 pt-4 pb-3 lg:pt-10 lg:pb-8 border-b border-cyan-10 shrink-0">
       {/* Top row: logo + title + day tabs */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <RoboConLogo />
-          <h1 className="text-3xl font-bold tracking-[0.15em] text-cyan uppercase" style={{ fontFamily: "var(--font-heading)" }}>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14 shrink-0">
+            <RoboConLogo />
+          </div>
+          <h1 className="text-lg sm:text-xl lg:text-3xl font-bold tracking-[0.15em] text-cyan uppercase" style={{ fontFamily: "var(--font-heading)" }}>
             RoboCon 2026
           </h1>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2 sm:gap-3">
           <DayTab label="Day 1" active={dayLabel === "Day 1"} />
           <DayTab label="Day 2" active={dayLabel === "Day 2"} />
         </div>
       </div>
       {/* Bottom row: date + time, centered */}
-      <div className="flex items-center justify-center gap-5">
-        <span className="text-cyan-60 text-2xl">{formatCurrentDate(now)}</span>
-        <span className="text-5xl font-bold text-teal tabular-nums tracking-wider">
+      <div className="flex items-center justify-center gap-3 lg:gap-5">
+        <span className="text-cyan-60 text-sm sm:text-lg lg:text-2xl">{formatCurrentDate(now)}</span>
+        <span className="text-2xl sm:text-3xl lg:text-5xl font-bold text-teal tabular-nums tracking-wider">
           {formatCurrentTime(now)}
         </span>
       </div>
@@ -37,12 +39,11 @@ export function Header({ now, dayLabel }: HeaderProps) {
 function DayTab({ label, active }: { label: string; active: boolean }) {
   return (
     <span
-      className={`py-4 text-2xl font-bold rounded-full transition-colors ${
+      className={`py-1.5 sm:py-2 lg:py-4 px-2.5 sm:px-3 lg:px-4 text-xs sm:text-base lg:text-2xl font-bold rounded-full transition-colors ${
         active
           ? "bg-teal text-navy"
           : "bg-cyan-10 text-cyan-60"
       }`}
-      style={{ paddingLeft: "15px", paddingRight: "15px" }}
     >
       {label}
     </span>
@@ -51,7 +52,7 @@ function DayTab({ label, active }: { label: string; active: boolean }) {
 
 function RoboConLogo() {
   return (
-    <svg width="56" height="56" viewBox="40 40 122.4325 122.34125" xmlns="http://www.w3.org/2000/svg">
+    <svg width="100%" height="100%" viewBox="40 40 122.4325 122.34125" xmlns="http://www.w3.org/2000/svg">
       <g transform="matrix(1.25,0,0,-1.25,0,202.34125)">
         <g>
           <g>

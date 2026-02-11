@@ -16,33 +16,33 @@ export function BreakCard({ item, progress, now, nextTalk }: BreakCardProps) {
   const timeUntilNext = getTimeUntil(itemEnd, now);
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex items-center gap-4">
-        <span className="flex items-center gap-3 text-teal font-semibold text-2xl uppercase tracking-wider">
+    <div className="flex flex-col gap-3 lg:gap-5">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <span className="flex items-center gap-2 sm:gap-3 text-teal font-semibold text-base sm:text-xl lg:text-2xl uppercase tracking-wider">
           <BreakIcon />
           Now
         </span>
-        <span className="text-cyan-60 text-xl">
+        <span className="text-cyan-60 text-sm sm:text-base lg:text-xl">
           {formatTime(item.start)} &ndash; {formatTime(item.end)}
         </span>
       </div>
 
       <ProgressBar progress={progress} />
 
-      <div className="border-l-4 border-cyan-30 rounded-r-xl px-12 py-10 flex flex-col items-center justify-center gap-5 bg-cyan/[0.02]">
-        <span className="text-6xl">{getBreakEmoji(item.title)}</span>
+      <div className="border-l-4 border-cyan-30 rounded-r-xl px-4 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-10 flex flex-col items-center justify-center gap-3 lg:gap-5 bg-cyan/[0.02]">
+        <span className="text-4xl lg:text-6xl">{getBreakEmoji(item.title)}</span>
         <h2
-          className="text-3xl font-bold text-cyan/80"
+          className="text-xl sm:text-2xl lg:text-3xl font-bold text-cyan/80"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {item.title}
         </h2>
         {nextTalk && (
-          <div className="text-center mt-2">
-            <p className="text-cyan-60 text-base">
+          <div className="text-center mt-1 lg:mt-2">
+            <p className="text-cyan-60 text-sm lg:text-base">
               Next up {timeUntilNext}
             </p>
-            <p className="text-teal text-lg font-semibold mt-1">
+            <p className="text-teal text-base lg:text-lg font-semibold mt-1">
               {nextTalk.title}
             </p>
           </div>

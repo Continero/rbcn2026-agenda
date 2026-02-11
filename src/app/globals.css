@@ -46,6 +46,19 @@ html, body {
   background: #000011;
   color: rgb(230, 248, 246);
   font-family: var(--font-mono);
-  cursor: none;
-  user-select: none;
+}
+
+@media (min-width: 1024px) {
+  html, body {
+    cursor: none;
+    user-select: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
 }
