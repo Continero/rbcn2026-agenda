@@ -93,7 +93,7 @@ function UpNextItem({
             )}
           </div>
           {!item.isBreak && itemSpeakers.length > 0 && (
-            <p className="text-sm lg:text-base text-cyan/40 mt-1 truncate">
+            <p className="text-sm lg:text-base text-cyan/50 mt-1 truncate">
               {itemSpeakers.map((s) => s.name).join(", ")}
             </p>
           )}

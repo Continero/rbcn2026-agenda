@@ -19,9 +19,9 @@
   --color-teal-dim: #01968f;
   --color-teal-glow: rgba(0, 192, 181, 0.15);
   --color-cyan: rgb(230, 248, 246);
-  --color-cyan-60: rgba(230, 248, 246, 0.6);
-  --color-cyan-30: rgba(230, 248, 246, 0.3);
-  --color-cyan-10: rgba(230, 248, 246, 0.1);
+  --color-cyan-60: rgba(230, 248, 246, 0.7);
+  --color-cyan-30: rgba(230, 248, 246, 0.5);
+  --color-cyan-10: rgba(230, 248, 246, 0.15);
   --color-white: #ffffff;
   --color-white-60: rgba(255, 255, 255, 0.6);
   --color-white-30: rgba(255, 255, 255, 0.3);
