@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { schedule } from "@/data/schedule";
 import { useCurrentTime } from "@/hooks/useCurrentTime";
 import { getScheduleState, getTimeUntil } from "@/lib/schedule-utils";
@@ -45,11 +46,26 @@ function LiveView({
   now: Date;
 }) {
   const nextTalk = state.upNext.find((item) => !item.isBreak) || null;
+  const nowRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to the NOW card on mount (mobile: past talks are above, so scroll down to current)
+  useEffect(() => {
+    if (nowRef.current && window.innerWidth < 1024) {
+      nowRef.current.scrollIntoView({ behavior: "instant", block: "start" });
+    }
+  }, []);
 
   return (
     <>
+      {/* Past talks – above NOW so mobile users can scroll up to see them */}
+      {state.past.length > 0 && (
+        <div className="shrink-0">
+          <PastTalks items={state.past} />
+        </div>
+      )}
+
       {/* Current talk / break - never clipped */}
-      <div className="shrink-0">
+      <div className="shrink-0" ref={nowRef}>
         {state.currentItem && (
           state.currentItem.isBreak ? (
             <BreakCard
@@ -70,16 +86,9 @@ function LiveView({
       {/* Divider */}
       <div className="shrink-0 h-px bg-cyan-10" />
 
-      {/* Bottom: Up Next + Past Talks – grid ensures Past Talks always visible on desktop */}
-      <div className="flex-1 lg:min-h-0 lg:grid lg:grid-rows-[minmax(0,1fr)_auto] gap-6 lg:overflow-hidden">
-        <div className="lg:overflow-hidden">
-          <UpNext items={state.upNext} />
-        </div>
-        {state.past.length > 0 && (
-          <div>
-            <PastTalks items={state.past} />
-          </div>
-        )}
+      {/* Up Next – fills remaining space, scrollable on desktop */}
+      <div className="flex-1 lg:min-h-0 lg:overflow-hidden">
+        <UpNext items={state.upNext} />
       </div>
     </>
   );
