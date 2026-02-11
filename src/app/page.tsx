@@ -10,6 +10,7 @@ import { BreakCard } from "@/components/BreakCard";
 import { UpNext } from "@/components/UpNext";
 import { PastTalks } from "@/components/PastTalks";
 import { AuroraBackground } from "@/components/AuroraBackground";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function Home() {
   const now = useCurrentTime(1000);
@@ -49,6 +50,22 @@ export default function Home() {
           <LiveView state={state} now={now} />
         )}
       </main>
+      </div>
+
+      {/* QR code — TV/desktop only, bottom-right corner */}
+      <div className="hidden lg:flex fixed bottom-6 right-6 z-20 flex-col items-center gap-2">
+        <div className="rounded-xl bg-white p-2.5">
+          <QRCodeSVG
+            value="https://robocon2026-agenda.netlify.app"
+            size={100}
+            bgColor="#ffffff"
+            fgColor="#000011"
+            level="M"
+          />
+        </div>
+        <span className="text-[10px] text-cyan-30 uppercase tracking-widest">
+          Scan for mobile
+        </span>
       </div>
     </div>
   );
