@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./aurora.css";
 
 @font-face {
   font-family: "OCR-RBCN";

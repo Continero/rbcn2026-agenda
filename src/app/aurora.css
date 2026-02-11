@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Aurora Atmospheric Background — Keyframes & Styles
+   ========================================================================== */
+
+/* --- Aurora gradient drift animations --- */
+
+@keyframes aurora-drift-1 {
+  0%, 100% {
+    background-position: 0% 80%;
+  }
+  50% {
+    background-position: 80% 20%;
+  }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% {
+    background-position: 60% 0%;
+  }
+  33% {
+    background-position: 20% 60%;
+  }
+  66% {
+    background-position: 80% 40%;
+  }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% {
+    background-position: 50% 50%;
+  }
+  25% {
+    background-position: 20% 30%;
+  }
+  50% {
+    background-position: 70% 60%;
+  }
+  75% {
+    background-position: 40% 20%;
+  }
+}
+
+/* --- Star twinkle animations --- */
+
+@keyframes twinkle-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes twinkle-mid {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes twinkle-fast {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+/* --- Aurora pulse (on talk change) --- */
+
+@keyframes aurora-pulse {
+  0% { opacity: 1; }
+  15% { opacity: 2.3; }
+  100% { opacity: 1; }
+}
+
+/* --- Progress bar shimmer sweep --- */
+
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* --- Current talk card glow --- */
+
+@keyframes glow-breathe {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 192, 181, 0.06), 0 0 60px rgba(0, 192, 181, 0.03);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 192, 181, 0.12), 0 0 80px rgba(0, 192, 181, 0.06);
+  }
+}
+
+/* --- Up Next first-item border shift --- */
+
+@keyframes border-shift {
+  0%, 100% {
+    border-left-color: #00c0b5;
+  }
+  50% {
+    border-left-color: #bbc446;
+  }
+}
+
+/* ==========================================================================
+   Aurora Background Layer Styles
+   ========================================================================== */
+
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Layer 1: Deep base — magenta/indigo, slowest */
+.aurora-layer-1 {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(31, 27, 159, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(255, 0, 225, 0.15) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: aurora-drift-1 40s ease-in-out infinite;
+  will-change: background-position;
+}
+
+/* Layer 2: Mid aurora — teal/lime band */
+.aurora-layer-2 {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 30%, rgba(0, 192, 181, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 30% 50%, rgba(187, 196, 70, 0.08) 0%, transparent 50%);
+  background-size: 250% 250%;
+  animation: aurora-drift-2 25s ease-in-out infinite;
+  will-change: background-position;
+}
+
+/* Layer 3: Highlight shimmer — bright teal accent */
+.aurora-layer-3 {
+  background:
+    radial-gradient(ellipse 40% 30% at 60% 40%, rgba(0, 192, 181, 0.10) 0%, transparent 50%);
+  background-size: 300% 300%;
+  animation: aurora-drift-3 15s ease-in-out infinite;
+  will-change: background-position;
+}
+
+/* Pulse modifier — scales opacity on all layers */
+.aurora-bg.aurora-pulse-active .aurora-layer-2 {
+  animation: aurora-drift-2 25s ease-in-out infinite, aurora-pulse 4s ease-out forwards;
+}
+
+/* ==========================================================================
+   Transition Accent Styles
+   ========================================================================== */
+
+/* Current talk card glow */
+.glow-breathe {
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+/* Progress bar shimmer */
+.shimmer-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 8s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+/* Up Next first item animated border */
+.border-shift-active {
+  border-left: 3px solid #00c0b5;
+  animation: border-shift 10s ease-in-out infinite;
+}

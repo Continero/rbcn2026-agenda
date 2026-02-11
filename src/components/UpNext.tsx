@@ -63,7 +63,7 @@ function UpNextItem({
   return (
     <div
       className={`py-3 lg:py-4 border-b border-cyan/[0.06] last:border-b-0 ${
-        isFirst ? "bg-cyan/[0.03] rounded-lg px-3 sm:px-4 lg:px-5 -mx-3 sm:-mx-4 lg:-mx-5" : ""
+        isFirst ? "bg-cyan/[0.03] rounded-lg px-3 sm:px-4 lg:px-5 -mx-3 sm:-mx-4 lg:-mx-5 border-shift-active" : ""
       } ${hasAbstract ? "cursor-pointer active:bg-cyan/[0.05] transition-colors" : ""}`}
       onClick={hasAbstract ? onToggle : undefined}
     >

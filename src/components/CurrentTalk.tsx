@@ -34,7 +34,7 @@ export function CurrentTalk({ item, progress }: CurrentTalkProps) {
       <ProgressBar progress={progress} />
 
       <div
-        className="border-l-4 border-teal rounded-r-xl px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6 flex flex-col gap-3 lg:gap-4"
+        className="border-l-4 border-teal rounded-r-xl px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6 flex flex-col gap-3 lg:gap-4 glow-breathe"
         style={{
           background: "rgba(0, 192, 181, 0.04)",
         }}

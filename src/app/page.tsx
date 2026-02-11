@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { schedule } from "@/data/schedule";
 import { useCurrentTime } from "@/hooks/useCurrentTime";
 import { getScheduleState, getTimeUntil } from "@/lib/schedule-utils";
@@ -9,14 +9,30 @@ import { CurrentTalk } from "@/components/CurrentTalk";
 import { BreakCard } from "@/components/BreakCard";
 import { UpNext } from "@/components/UpNext";
 import { PastTalks } from "@/components/PastTalks";
+import { AuroraBackground } from "@/components/AuroraBackground";
 
 export default function Home() {
   const now = useCurrentTime(1000);
   const state = getScheduleState(schedule, now);
 
+  // Pulse aurora when current item changes
+  const [auroraPulse, setAuroraPulse] = useState(false);
+  const prevItemId = useRef<number | null>(null);
+
+  useEffect(() => {
+    const currentId = state.currentItem?.id ?? null;
+    if (prevItemId.current !== null && currentId !== prevItemId.current) {
+      setAuroraPulse(true);
+      const timer = setTimeout(() => setAuroraPulse(false), 4000);
+      return () => clearTimeout(timer);
+    }
+    prevItemId.current = currentId;
+  }, [state.currentItem?.id]);
+
   return (
     <div className="w-screen min-h-screen lg:h-screen bg-navy lg:overflow-hidden flex justify-center">
-      <div className="w-full lg:w-[75%] h-full flex flex-col lg:overflow-hidden">
+      <AuroraBackground pulse={auroraPulse} />
+      <div className="w-full lg:w-[75%] h-full flex flex-col lg:overflow-hidden relative z-10">
       <Header now={now} dayLabel={state.dayLabel} />
 
       <main className="flex-1 flex flex-col lg:overflow-hidden lg:min-h-0 px-4 py-4 gap-5 sm:px-6 sm:py-6 sm:gap-6 lg:px-20 lg:py-10 lg:gap-10">
