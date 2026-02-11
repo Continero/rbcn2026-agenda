@@ -10,8 +10,8 @@ interface HeaderProps {
 export function Header({ now, dayLabel }: HeaderProps) {
   return (
     <header className="flex flex-col gap-3 lg:gap-5 px-4 sm:px-6 lg:px-0 pt-4 pb-3 lg:pt-10 lg:pb-8 border-b border-cyan-10 shrink-0">
-      {/* Top row: logo + title + day tabs */}
-      <div className="flex items-center justify-between">
+      {/* Top row: logo + title */}
+      <div className="flex items-center">
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14 shrink-0">
             <RoboConLogo />
@@ -20,17 +20,17 @@ export function Header({ now, dayLabel }: HeaderProps) {
             RoboCon 2026
           </h1>
         </div>
-        <div className="flex gap-2 sm:gap-3">
-          <DayTab label="Day 1" active={dayLabel === "Day 1"} />
-          <DayTab label="Day 2" active={dayLabel === "Day 2"} />
-        </div>
       </div>
-      {/* Bottom row: date + time, centered */}
+      {/* Bottom row: day tabs centered with date + time */}
       <div className="flex items-center justify-center gap-3 lg:gap-5">
         <span className="text-cyan-60 text-sm sm:text-lg lg:text-2xl">{formatCurrentDate(now)}</span>
         <span className="text-2xl sm:text-3xl lg:text-5xl font-bold text-teal tabular-nums tracking-wider">
           {formatCurrentTime(now)}
         </span>
+        <div className="flex gap-2 sm:gap-3 ml-3 lg:ml-5">
+          <DayTab label="Day 1" active={dayLabel === "Day 1"} />
+          <DayTab label="Day 2" active={dayLabel === "Day 2"} />
+        </div>
       </div>
     </header>
   );
