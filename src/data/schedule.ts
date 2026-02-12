@@ -222,6 +222,26 @@ export const schedule: ScheduleItem[] = [
     duration: 10,
     isBreak: true,
   },
+  {
+    id: 9900001,
+    title: "🍽️ Community Dinner — Ravintola Laulu",
+    abstract: "Our community dinner is this evening, Thursday 12th February, starting at 18:30. For those still at BioRex, we meet in the lobby at 18:00 to walk over together. Held at Ravintola Laulu (Ballroom Laulu-Miehet), Hietaniemenkatu 2, 00100 Helsinki — a short walk from the conference venue.",
+    speakerCodes: [],
+    start: "2026-02-12T16:30:00Z",
+    end: "2026-02-12T18:30:00Z",
+    duration: 120,
+    isBreak: false,
+  },
+  {
+    id: 9900002,
+    title: '🎤 "Subtle" Karaoke Party — Everyone Welcome!',
+    abstract: "Karaokebar Erottaja — right after the community dinner. No keywords required, just vibes. Whether you sing like a rockstar or like a flaky test — you're welcome. Bring your voice, leave your RIDE logs at the door. Warning: singing 'Never Gonna Give You Up' may trigger applause... or groans.",
+    speakerCodes: [],
+    start: "2026-02-12T18:30:00Z",
+    end: "2026-02-12T21:00:00Z",
+    duration: 150,
+    isBreak: false,
+  },
   // === Day 2: February 13, 2026 ===
   {
     id: 1412223,

@@ -11,6 +11,7 @@ interface UpNextProps {
 
 export function UpNext({ items }: UpNextProps) {
   const firstTalkId = items.find((item) => !item.isBreak && item.abstract)?.id ?? null;
+  const karaokeId = items.find((item) => item.title.toLowerCase().includes("karaoke"))?.id ?? null;
   const [expandedId, setExpandedId] = useState<number | null>(firstTalkId);
   const prevFirstId = useRef(firstTalkId);
 
@@ -37,7 +38,7 @@ export function UpNext({ items }: UpNextProps) {
             key={item.id}
             item={item}
             isFirst={idx === 0}
-            isExpanded={expandedId === item.id}
+            isExpanded={expandedId === item.id || item.id === karaokeId}
             onToggle={() => setExpandedId(expandedId === item.id ? null : item.id)}
           />
         ))}
@@ -62,18 +63,19 @@ function UpNextItem({
     .filter(Boolean);
 
   const hasAbstract = !item.isBreak && !!item.abstract;
+  const isHighlight = item.title.toLowerCase().includes("karaoke");
 
   return (
     <div
       className={`py-3 lg:py-4 border-b border-cyan/[0.06] last:border-b-0 ${
         isFirst ? "bg-cyan/[0.03] rounded-lg px-3 sm:px-4 lg:px-5 -mx-3 sm:-mx-4 lg:-mx-5 border-shift-active" : ""
-      } ${hasAbstract ? "cursor-pointer active:bg-cyan/[0.05] transition-colors" : ""}`}
+      } ${isHighlight ? "upnext-highlight rounded-lg px-3 sm:px-4 lg:px-5 -mx-3 sm:-mx-4 lg:-mx-5" : ""} ${hasAbstract ? "cursor-pointer active:bg-cyan/[0.05] transition-colors" : ""}`}
       onClick={hasAbstract ? onToggle : undefined}
     >
       <div className="flex items-start gap-3 lg:gap-5">
         <span
           className={`text-base lg:text-xl font-mono tabular-nums mt-0.5 shrink-0 w-12 lg:w-16 ${
-            item.isBreak ? "text-cyan-30" : "text-teal"
+            isHighlight ? "text-gradient-1" : item.isBreak ? "text-cyan-30" : "text-teal"
           }`}
         >
           {formatTime(item.start)}
@@ -82,9 +84,11 @@ function UpNextItem({
           <div className="flex items-start gap-2">
             <p
               className={`text-base lg:text-xl leading-snug flex-1 ${
-                item.isBreak
-                  ? "text-cyan-30 italic"
-                  : "text-cyan/90 font-medium"
+                isHighlight
+                  ? "text-gradient-1 font-bold"
+                  : item.isBreak
+                    ? "text-cyan-30 italic"
+                    : "text-cyan/90 font-medium"
               }`}
             >
               {item.title}

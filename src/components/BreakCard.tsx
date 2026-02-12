@@ -61,6 +61,8 @@ function getBreakEmoji(title: string): string {
   if (lower.includes("lightning")) return "\u26A1";
   if (lower.includes("elevator") || lower.includes("sponsor")) return "\uD83C\uDFA4";
   if (lower.includes("voting")) return "\uD83D\uDDF3\uFE0F";
+  if (lower.includes("karaoke")) return "\uD83C\uDFA4";
+  if (lower.includes("dinner")) return "\uD83C\uDF7D\uFE0F";
   return "\u23F8\uFE0F";
 }
 

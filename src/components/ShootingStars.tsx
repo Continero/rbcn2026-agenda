@@ -140,6 +140,16 @@ const GNOME_MESSAGES = [
   "Tervetuloa! 🎊",
 ];
 
+const KARAOKE_ANNOUNCEMENTS = [
+  "📣 KARAOKE TONIGHT @ 20:00!",
+  "📣 Karaokebar Erottaja — be there!",
+  "📣 Karaoke after dinner! 🎤🎶",
+  "📣 Tonight: \"Subtle\" Karaoke Party!",
+  "📣 Everyone welcome @ Erottaja! 🎵",
+];
+const ANNOUNCE_INTERVAL_MS = 90000; // every 1.5 minutes
+const ANNOUNCE_DURATION_MS = 6000;
+
 // RF logo SVG using currentColor for fill
 const RF_PATH = "m 0,0 c 0,7.6 6.179,13.779 13.77,13.779 7.6,0 13.779,-6.179 13.779,-13.779 0,-2.769 -2.238,-5.007 -4.998,-5.007 -2.761,0 -4.999,2.238 -4.999,5.007 0,2.078 -1.695,3.765 -3.782,3.765 C 11.693,3.765 9.997,2.078 9.997,0 9.997,-2.769 7.76,-5.007 4.999,-5.007 2.238,-5.007 0,-2.769 0,0 m 57.05,-23.153 c 0,-2.771 -2.237,-5.007 -4.998,-5.007 l -46.378,0 c -2.761,0 -4.999,2.236 -4.999,5.007 0,2.769 2.238,5.007 4.999,5.007 l 46.378,0 c 2.761,0 4.998,-2.238 4.998,-5.007 M 35.379,-2.805 c -1.545,2.291 -0.941,5.398 1.35,6.943 l 11.594,7.83 c 2.273,1.58 5.398,0.941 6.943,-1.332 1.545,-2.29 0.941,-5.398 -1.35,-6.943 l -11.594,-7.83 c -0.852,-0.586 -1.829,-0.87 -2.788,-0.87 -1.607,0 -3.187,0.781 -4.155,2.202 m 31.748,-30.786 c 0,-0.945 -0.376,-1.852 -1.045,-2.522 l -8.617,-8.617 c -0.669,-0.668 -1.576,-1.045 -2.523,-1.045 l -52.833,0 c -0.947,0 -1.854,0.377 -2.523,1.045 l -8.617,8.617 c -0.669,0.67 -1.045,1.577 -1.045,2.522 l 0,52.799 c 0,0.947 0.376,1.854 1.045,2.522 l 8.617,8.619 c 0.669,0.668 1.576,1.044 2.523,1.044 l 52.833,0 c 0.947,0 1.854,-0.376 2.523,-1.044 l 8.617,-8.619 c 0.669,-0.668 1.045,-1.575 1.045,-2.522 l 0,-52.799 z m 7.334,61.086 -11.25,11.25 c -1.705,1.705 -4.018,2.663 -6.428,2.663 l -56.523,0 c -2.412,0 -4.725,-0.959 -6.43,-2.665 L -17.412,27.494 c -1.704,-1.705 -2.661,-4.016 -2.661,-6.427 l 0,-56.515 c 0,-2.411 0.958,-4.725 2.663,-6.428 l 11.25,-11.25 c 1.705,-1.705 4.017,-2.662 6.428,-2.662 l 56.515,0 c 2.41,0 4.723,0.957 6.428,2.662 l 11.25,11.25 c 1.705,1.703 2.663,4.017 2.663,6.428 l 0,56.514 c 0,2.412 -0.958,4.724 -2.663,6.429";
 
@@ -446,13 +456,13 @@ export function ShootingStars() {
     }
 
     // Show a speech bubble above a gnome
-    function showBubble(gnome: Gnome, customMsg?: string, duration: number = BUBBLE_DURATION_MS) {
+    function showBubble(gnome: Gnome, customMsg?: string, duration: number = BUBBLE_DURATION_MS, mega: boolean = false) {
       // Remove existing bubble if any
       if (gnome.bubbleEl) gnome.bubbleEl.remove();
 
       const msg = customMsg || GNOME_MESSAGES[Math.floor(Math.random() * GNOME_MESSAGES.length)];
       const bubble = document.createElement("div");
-      bubble.className = "gnome-bubble";
+      bubble.className = mega ? "gnome-bubble gnome-bubble-mega" : "gnome-bubble";
       bubble.textContent = msg;
       container!.appendChild(bubble);
       gnome.bubbleEl = bubble;
@@ -536,6 +546,36 @@ export function ShootingStars() {
 
     // First song after 30-60s
     songTimerId = setTimeout(playSong, (30000 + Math.random() * 30000) / timeBoost);
+
+    // --- Karaoke announcement timer ---
+    let announceTimerId: ReturnType<typeof setTimeout>;
+    let lastAnnounceIdx = -1;
+
+    function scheduleAnnouncement() {
+      const delay = ANNOUNCE_INTERVAL_MS / timeBoost;
+      announceTimerId = setTimeout(() => {
+        if (!singing) {
+          // Pick a random announcement (avoid repeat)
+          let idx = Math.floor(Math.random() * KARAOKE_ANNOUNCEMENTS.length);
+          if (idx === lastAnnounceIdx && KARAOKE_ANNOUNCEMENTS.length > 1) idx = (idx + 1) % KARAOKE_ANNOUNCEMENTS.length;
+          lastAnnounceIdx = idx;
+
+          // Both gnomes announce together
+          const msg = KARAOKE_ANNOUNCEMENTS[idx];
+          showBubble(gnomes[0], msg, ANNOUNCE_DURATION_MS, true);
+          showBubble(gnomes[1], msg, ANNOUNCE_DURATION_MS, true);
+        }
+        scheduleAnnouncement();
+      }, delay);
+    }
+
+    // First announcement after 15-25s
+    announceTimerId = setTimeout(() => {
+      const msg = KARAOKE_ANNOUNCEMENTS[0];
+      showBubble(gnomes[0], msg, ANNOUNCE_DURATION_MS, true);
+      showBubble(gnomes[1], msg, ANNOUNCE_DURATION_MS, true);
+      scheduleAnnouncement();
+    }, (15000 + Math.random() * 10000) / timeBoost);
 
     // --- Animation loop ---
     let frameId: number;
@@ -877,6 +917,7 @@ export function ShootingStars() {
       clearTimeout(spawnTimerId);
       clearTimeout(bubbleTimerId);
       clearTimeout(songTimerId);
+      clearTimeout(announceTimerId);
       songTimeouts.forEach(clearTimeout);
       window.removeEventListener("resize", handleResize);
       Matter.Engine.clear(engine);

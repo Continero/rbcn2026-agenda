@@ -106,6 +106,22 @@
   opacity: 0;
 }
 
+/* Mega announcement bubble */
+.gnome-bubble-mega {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(187, 196, 70, 0.2);
+  border: 2px solid rgba(187, 196, 70, 0.5);
+  color: #bbc446;
+  box-shadow: 0 0 12px rgba(187, 196, 70, 0.3);
+}
+
+.gnome-bubble-mega::after {
+  border-top-color: rgba(187, 196, 70, 0.5);
+}
+
 /* Floating music notes when gnomes dance */
 @keyframes note-float {
   0% {

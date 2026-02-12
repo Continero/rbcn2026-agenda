@@ -64,3 +64,50 @@ html, body {
     min-height: 100vh;
   }
 }
+
+/* Highlighted Up Next item (karaoke etc.) */
+@keyframes highlight-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.upnext-highlight {
+  position: relative;
+  background: rgba(187, 196, 70, 0.06);
+  border: 1px solid rgba(187, 196, 70, 0.25);
+  overflow: hidden;
+}
+
+.upnext-highlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(187, 196, 70, 0.1) 45%,
+    rgba(255, 215, 0, 0.15) 50%,
+    rgba(187, 196, 70, 0.1) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: highlight-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.upnext-highlight .text-gradient-1 {
+  color: #bbc446;
+}
