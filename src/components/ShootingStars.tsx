@@ -552,8 +552,14 @@ export function ShootingStars() {
         const hitLeft = star.vx < 0 && star.x <= EDGE_MARGIN;
         const hitBottom = star.y + LOGO_SIZE >= h - EDGE_MARGIN;
 
-        if (hitRight || hitLeft || hitBottom) {
-          impactStar(star, hitBottom);
+        if (hitRight || hitLeft) {
+          // Bounce off wall — reverse horizontal, add sparks
+          star.vx = -star.vx;
+          star.angle = 180 - star.angle;
+          star.x = hitRight ? w - EDGE_MARGIN - LOGO_SIZE : EDGE_MARGIN + 1;
+          createSparks(hitRight ? w - EDGE_MARGIN : EDGE_MARGIN, star.y);
+        } else if (hitBottom) {
+          impactStar(star, true);
         }
       }
 
