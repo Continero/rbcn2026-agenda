@@ -35,7 +35,7 @@ A real-time conference agenda that knows what's happening now, what's coming up,
 - **Two amigurumi-style gnomes** (red hat & green hat) walk along the bottom
 - **Physics interaction** — gnomes push fallen RF logos as they walk (matter.js static bodies)
 - **Speech bubbles** — random Robot Framework messages and Finnish greetings every 20-40s
-- **Dance mode** — when gnomes meet, they do a synchronized bounce dance with floating music notes
+- **Pancake break** — when gnomes meet, they sit down and eat pancakes together 🥞
 - **Shooting** — both gnomes fire teal projectiles at flying stars (15% hit rate with homing)
 - **Super Saiyan mode** — picking up a golden logo triggers: 1.5x size, 3x speed, golden aura, explosive push on nearby logos, and instant gold laser shots that always hit
 - **Singing duets** — gnomes alternate lines from well-known songs every 2 minutes:

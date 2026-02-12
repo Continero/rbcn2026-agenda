@@ -16,9 +16,9 @@ const GNOME_W = 24;
 const GNOME_H = 40;
 const GNOME_SPEED = 0.4; // pixels per frame
 const GNOME_MARGIN = 60; // turn-around margin from edges
-const GNOME_MEET_DISTANCE = 40; // pixels apart to trigger dance
-const DANCE_DURATION = 180; // frames (~3 seconds at 60fps)
-const DANCE_COOLDOWN = 300; // frames before they can dance again
+const GNOME_MEET_DISTANCE = 40; // pixels apart to trigger pancake eating
+const PANCAKE_DURATION = 240; // frames (~4 seconds at 60fps)
+const PANCAKE_COOLDOWN = 300; // frames before they can eat again
 const SHOOT_INTERVAL = 60; // frames (~1s at 60fps)
 const PROJECTILE_SPEED = 8; // pixels per frame
 const HIT_CHANCE = 0.15; // 15% hit rate
@@ -141,7 +141,7 @@ const GNOME_MESSAGES = [
 ];
 
 const KARAOKE_ANNOUNCEMENTS = [
-  "📣 KARAOKE TONIGHT @ 20:00!",
+  "📣 KARAOKE TONIGHT @ 20:30!",
   "📣 Karaokebar Erottaja — be there!",
   "📣 Karaoke after dinner! 🎤🎶",
   "📣 Tonight: \"Subtle\" Karaoke Party!",
@@ -217,9 +217,9 @@ interface Gnome {
   el: HTMLDivElement;
   frame: number;
   bubbleEl: HTMLDivElement | null;
-  dancing: boolean;
-  danceFrame: number;
-  danceCooldown: number;
+  eating: boolean;
+  eatFrame: number;
+  eatCooldown: number;
   superSaiyan: boolean;
   superSaiyanFrame: number;
   shootFrame: number;
@@ -452,17 +452,20 @@ export function ShootingStars() {
       el.innerHTML = gnomeSvg(hatColor);
       container!.appendChild(el);
 
-      return { x: startX, direction, body, el, frame: 0, bubbleEl: null, dancing: false, danceFrame: 0, danceCooldown: 0, superSaiyan: false, superSaiyanFrame: 0, shootFrame: 0 };
+      return { x: startX, direction, body, el, frame: 0, bubbleEl: null, eating: false, eatFrame: 0, eatCooldown: 0, superSaiyan: false, superSaiyanFrame: 0, shootFrame: 0 };
     }
 
     // Show a speech bubble above a gnome
-    function showBubble(gnome: Gnome, customMsg?: string, duration: number = BUBBLE_DURATION_MS, mega: boolean = false) {
+    function showBubble(gnome: Gnome, customMsg?: string, duration: number = BUBBLE_DURATION_MS, mega: boolean = false, shiny: boolean = false) {
       // Remove existing bubble if any
       if (gnome.bubbleEl) gnome.bubbleEl.remove();
 
       const msg = customMsg || GNOME_MESSAGES[Math.floor(Math.random() * GNOME_MESSAGES.length)];
       const bubble = document.createElement("div");
-      bubble.className = mega ? "gnome-bubble gnome-bubble-mega" : "gnome-bubble";
+      const classes = ["gnome-bubble"];
+      if (mega) classes.push("gnome-bubble-mega");
+      if (shiny) classes.push("gnome-bubble-shiny");
+      bubble.className = classes.join(" ");
       bubble.textContent = msg;
       container!.appendChild(bubble);
       gnome.bubbleEl = bubble;
@@ -510,8 +513,8 @@ export function ShootingStars() {
     let lastSongIdx = -1;
 
     function playSong() {
-      // Don't sing while dancing
-      if (gnomes[0].dancing || gnomes[1].dancing) {
+      // Don't sing while eating
+      if (gnomes[0].eating || gnomes[1].eating) {
         songTimerId = setTimeout(playSong, 5000 / timeBoost);
         return;
       }
@@ -603,30 +606,45 @@ export function ShootingStars() {
         }
       }
 
-      // Check if gnomes should start dancing
+      // Check if gnomes should sit down and eat pancakes
       const g0 = gnomes[0];
       const g1 = gnomes[1];
       const gnomeDistance = Math.abs(g0.x - g1.x);
 
-      if (!g0.dancing && !g1.dancing && !g0.superSaiyan && !g1.superSaiyan && g0.danceCooldown <= 0 && g1.danceCooldown <= 0 && gnomeDistance < GNOME_MEET_DISTANCE) {
-        // Start dancing!
-        g0.dancing = true;
-        g1.dancing = true;
-        g0.danceFrame = 0;
-        g1.danceFrame = 0;
+      if (!g0.eating && !g1.eating && !g0.superSaiyan && !g1.superSaiyan && g0.eatCooldown <= 0 && g1.eatCooldown <= 0 && gnomeDistance < GNOME_MEET_DISTANCE) {
+        // Sit down and eat pancakes!
+        g0.eating = true;
+        g1.eating = true;
+        g0.eatFrame = 0;
+        g1.eatFrame = 0;
 
-        // Spawn floating music notes between them
+        // Spawn pancake plate between them
         const midX = (g0.x + g1.x) / 2;
-        const notes = ["♪", "♫", "♬", "🎵"];
+        const plate = document.createElement("div");
+        plate.className = "gnome-pancake-plate";
+        plate.textContent = "🥞";
+        plate.style.left = `${midX}px`;
+        plate.style.top = `${h - 20}px`;
+        container!.appendChild(plate);
+        setTimeout(() => plate.remove(), (PANCAKE_DURATION / FPS) * 1000 + 500);
+
+        // Shiny pancake bubble on both gnomes
+        const pancakeMessages = ["nom nom, wow pancakes from Kelby! 🥞✨", "mmm Kelby's pancakes! 🥞"];
+        showBubble(g0, pancakeMessages[0], (PANCAKE_DURATION / FPS) * 1000, false, true);
+        setTimeout(() => showBubble(g1, pancakeMessages[1], (PANCAKE_DURATION / FPS) * 800, false, true), 600);
+
+        // Floating yum reactions
+        const yums = ["😋", "🤤", "✨", "💛"];
         for (let i = 0; i < 4; i++) {
-          const note = document.createElement("div");
-          note.className = "gnome-note";
-          note.textContent = notes[i];
-          note.style.left = `${midX + (Math.random() - 0.5) * 30}px`;
-          note.style.top = `${h - GNOME_H - 10}px`;
-          note.style.animationDelay = `${i * 0.3}s`;
-          container!.appendChild(note);
-          setTimeout(() => note.remove(), 3000);
+          setTimeout(() => {
+            const yum = document.createElement("div");
+            yum.className = "gnome-note";
+            yum.textContent = yums[i];
+            yum.style.left = `${midX + (Math.random() - 0.5) * 30}px`;
+            yum.style.top = `${h - GNOME_H - 10}px`;
+            container!.appendChild(yum);
+            setTimeout(() => yum.remove(), 2000);
+          }, i * 800);
         }
       }
 
@@ -634,38 +652,41 @@ export function ShootingStars() {
       for (const gnome of gnomes) {
         gnome.frame++;
         const gnomeY = h - GNOME_H / 2;
+        const otherGnome = gnome === g0 ? g1 : g0;
 
-        if (gnome.dancing) {
-          gnome.danceFrame++;
+        if (gnome.eating) {
+          gnome.eatFrame++;
 
-          // Synchronized bounce dance — faster bobbing + side-to-side sway
-          const danceBob = Math.sin(gnome.danceFrame * 0.4) * 5;
-          const danceSway = Math.sin(gnome.danceFrame * 0.2) * 4;
-          const gnomeVisualY = gnomeY - GNOME_H / 2 + danceBob;
+          // Sitting down — gnome lowers and stays still, slight munching bob
+          const munchBob = Math.sin(gnome.eatFrame * 0.6) * 1.5;
+          const sitOffset = 6; // lower to "sit"
+          const gnomeVisualY = gnomeY - GNOME_H / 2 + sitOffset + munchBob;
 
-          // Face each other during dance
+          // Face each other while eating
           const faceDir = gnome === g0 ? (g1.x > g0.x ? 1 : -1) : (g0.x > g1.x ? 1 : -1);
-          gnome.el.style.transform = `translate(${gnome.x - GNOME_W / 2 + danceSway}px, ${gnomeVisualY}px) scaleX(${faceDir})`;
+          gnome.el.style.transform = `translate(${gnome.x - GNOME_W / 2}px, ${gnomeVisualY}px) scaleX(${faceDir})`;
 
           // Keep physics body in place
           Matter.Body.setPosition(gnome.body, { x: gnome.x, y: gnomeY });
           Matter.Body.setVelocity(gnome.body, { x: 0, y: 0 });
 
-          // Position bubble
+          // Position bubble — stagger if other gnome also has a bubble nearby
           if (gnome.bubbleEl) {
-            gnome.bubbleEl.style.left = `${gnome.x + danceSway}px`;
-            gnome.bubbleEl.style.top = `${gnomeVisualY - 30}px`;
+            const bubbleY = gnomeVisualY - 30;
+            const otherHasBubble = otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 120;
+            gnome.bubbleEl.style.left = `${gnome.x}px`;
+            gnome.bubbleEl.style.top = `${bubbleY - (otherHasBubble && gnome === g1 ? 28 : 0)}px`;
           }
 
-          // End dance after duration
-          if (gnome.danceFrame >= DANCE_DURATION) {
-            gnome.dancing = false;
-            gnome.danceCooldown = DANCE_COOLDOWN;
-            // Reverse direction after dance
+          // End eating after duration
+          if (gnome.eatFrame >= PANCAKE_DURATION) {
+            gnome.eating = false;
+            gnome.eatCooldown = PANCAKE_COOLDOWN;
+            // Reverse direction after eating
             gnome.direction = gnome === g0 ? -1 : 1;
           }
         } else {
-          if (gnome.danceCooldown > 0) gnome.danceCooldown--;
+          if (gnome.eatCooldown > 0) gnome.eatCooldown--;
 
           // Super saiyan timer
           if (gnome.superSaiyan) {
@@ -738,26 +759,30 @@ export function ShootingStars() {
 
           gnome.el.style.transform = `translate(${gnome.x - (GNOME_W * scaleMult) / 2}px, ${gnomeVisualY}px) scale(${scaleX * scaleMult}, ${scaleMult})`;
 
-          // Position bubble above gnome
+          // Position bubble above gnome — stagger if other gnome has bubble nearby
           if (gnome.bubbleEl) {
+            const bubbleY = gnomeVisualY - 30;
+            const otherHasBubble = otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 120;
             gnome.bubbleEl.style.left = `${gnome.x}px`;
-            gnome.bubbleEl.style.top = `${gnomeVisualY - 30}px`;
+            gnome.bubbleEl.style.top = `${bubbleY - (otherHasBubble && gnome === g1 ? 28 : 0)}px`;
           }
         }
       }
 
       // --- Both gnomes shooting ---
       for (const shooter of gnomes) {
-        if (shooter.dancing || flyingStars.length === 0) continue;
+        if (shooter.eating || flyingStars.length === 0) continue;
         shooter.shootFrame++;
         if (shooter.shootFrame < SHOOT_INTERVAL) continue;
         shooter.shootFrame = 0;
 
-        // Find closest flying star
+        // Find closest flying star in bottom 40% of screen
         let closest: FlyingStar | null = null;
         let closestDist = Infinity;
         const gnomeTopY = h - GNOME_H;
+        const shootZoneTop = h * 0.6; // only target stars below 60% from top
         for (const star of flyingStars) {
+          if (star.y < shootZoneTop) continue;
           const dx = star.x - shooter.x;
           const dy = star.y - gnomeTopY;
           const dist = Math.sqrt(dx * dx + dy * dy);
