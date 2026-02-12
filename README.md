@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RoboCon 2026 Live Agenda Display
 
-## Getting Started
+A live conference agenda display built for [RoboCon 2026](https://robocon.io) in Helsinki. Designed to run on a TV screen at the venue, showing the current talk, upcoming schedule, and a healthy dose of animated chaos.
 
-First, run the development server:
+**Live:** [robocon2026-agenda.netlify.app](https://robocon2026-agenda.netlify.app)
+
+## What Is This?
+
+A real-time conference agenda that knows what's happening now, what's coming up, and when it's time for coffee. Built in one evening through "vibe coding" — describing features in plain English and watching them appear.
+
+## Features
+
+### Schedule Display
+- **Live schedule** with automatic current talk detection and countdown timers
+- **Day 1 / Day 2 tabs** with automatic day switching
+- **Current talk card** with speaker info, abstract, and animated progress bar
+- **Up Next list** with expandable abstracts and auto-scroll on mobile
+- **Past talks** section (mobile: scroll up to see them)
+- **QR code** (desktop/TV only) for mobile access
+
+### Aurora Atmospheric Background
+- **3 animated aurora layers** — CSS gradient animations drifting at different speeds
+- **70 twinkling stars** — seeded random placement with varying sizes and animation timings
+- **Pulse effect** — aurora brightens when the current talk changes
+- **Shimmer sweep** on the progress bar
+
+### Shooting Stars
+- **RF logo comets** — the Robot Framework logo flies across the screen with a glowing teal tail
+- **Bidirectional** — stars come from both sides randomly
+- **Wall bouncing** — stars bounce off side walls with spark effects
+- **Physics pile** — stars that reach the bottom become fallen logos with matter.js physics
+- **Golden power-ups** — bottom-impact stars glow gold and pulse
+
+### Walking Gnomes
+- **Two amigurumi-style gnomes** (red hat & green hat) walk along the bottom
+- **Physics interaction** — gnomes push fallen RF logos as they walk (matter.js static bodies)
+- **Speech bubbles** — random Robot Framework messages and Finnish greetings every 20-40s
+- **Dance mode** — when gnomes meet, they do a synchronized bounce dance with floating music notes
+- **Shooting** — both gnomes fire teal projectiles at flying stars (15% hit rate with homing)
+- **Super Saiyan mode** — picking up a golden logo triggers: 1.5x size, 3x speed, golden aura, explosive push on nearby logos, and instant gold laser shots that always hit
+- **Singing duets** — gnomes alternate lines from well-known songs every 2 minutes:
+  - Bohemian Rhapsody, Never Gonna Give You Up, We Will Rock You, Don't Stop Believin', Hakuna Matata, YMCA, Baby Shark
+- **Karaoke announcements** — gold mega-bubbles promoting the evening karaoke party
+
+### Special Events
+- **Community Dinner** at Ravintola Laulu with venue details and meetup info
+- **Karaoke Party** at Karaokebar Erottaja — highlighted with golden shimmer effect, always-expanded description
+
+## Tech Stack
+
+- **Next.js 16** with Turbopack
+- **React 19**
+- **Tailwind CSS v4** (`@theme` syntax)
+- **matter.js** — 2D physics for fallen logo pile and gnome interactions
+- **qrcode.react** — QR code for mobile access
+- **TypeScript** throughout
+- Direct DOM manipulation for animations (performance over React state)
+- `requestAnimationFrame` loop for smooth 60fps updates
+
+## Design Tokens
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| Navy | `#000011` | Background |
+| Teal | `#00c0b5` | Accent, active elements |
+| Cyan | `rgb(230, 248, 246)` | Primary text |
+| Gold | `#bbc446` | Highlights, super saiyan, power-ups |
+| Font Heading | OCR-RBCN, OCR-A | Headers, tabs |
+| Font Mono | JetBrains Mono | Body text |
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Testing Parameters
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add `?timeboost=N` to the URL to speed up animations for testing:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `?timeboost=1` — normal speed (default)
+- `?timeboost=10` — 10x faster spawns, bubbles, songs, announcements
+- `?timeboost=50` — chaos mode
 
-## Learn More
+## How This Was Built
 
-To learn more about Next.js, take a look at the following resources:
+This entire project was built through conversational "vibe coding" with [Claude Code](https://claude.ai/claude-code). Every feature — from the aurora background to the super saiyan gnomes — was described in plain English and implemented iteratively in a single session.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The escalation went something like this:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> "nice aurora background" &#8594; "shooting stars with RF logos" &#8594; "walking gnomes" &#8594; "make them talk" &#8594; "what if they dance?" &#8594; "give them guns" &#8594; "SUPER SAIYAN MODE" &#8594; "they should sing Baby Shark"
 
-## Deploy on Vercel
+Zero tests. Zero regrets.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
