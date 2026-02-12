@@ -10,6 +10,7 @@ import { BreakCard } from "@/components/BreakCard";
 import { UpNext } from "@/components/UpNext";
 import { PastTalks } from "@/components/PastTalks";
 import { AuroraBackground } from "@/components/AuroraBackground";
+import { ShootingStars } from "@/components/ShootingStars";
 import { QRCodeSVG } from "qrcode.react";
 
 export default function Home() {
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <div className="w-screen min-h-screen lg:h-screen bg-navy lg:overflow-hidden flex justify-center">
       <AuroraBackground pulse={auroraPulse} />
+      <ShootingStars />
       <div className="w-full lg:w-[75%] h-full flex flex-col lg:overflow-hidden relative z-10">
       <Header now={now} dayLabel={state.dayLabel} />
 

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./aurora.css";
+@import "./shooting-stars.css";
 
 @font-face {
   font-family: "OCR-RBCN";
