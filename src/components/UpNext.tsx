@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ScheduleItem } from "@/data/schedule";
 import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
@@ -11,7 +11,16 @@ interface UpNextProps {
 
 export function UpNext({ items }: UpNextProps) {
   const visible = items.slice(0, 7);
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const firstTalkId = visible.find((item) => !item.isBreak && item.abstract)?.id ?? null;
+  const [expandedId, setExpandedId] = useState<number | null>(firstTalkId);
+  const prevFirstId = useRef(firstTalkId);
+
+  useEffect(() => {
+    if (firstTalkId !== prevFirstId.current) {
+      setExpandedId(firstTalkId);
+      prevFirstId.current = firstTalkId;
+    }
+  }, [firstTalkId]);
 
   if (visible.length === 0) return null;
 
