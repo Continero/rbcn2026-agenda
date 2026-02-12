@@ -126,6 +126,102 @@
   animation: note-float 2.5s ease-out forwards;
 }
 
+/* --- Gnome projectile --- */
+
+.gnome-projectile {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00c0b5;
+  box-shadow: 0 0 6px #00c0b5, 0 0 12px rgba(0, 192, 181, 0.4);
+  pointer-events: none;
+}
+
+.gnome-projectile::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 192, 181, 0.3) 50%,
+    rgba(0, 192, 181, 0.8) 100%
+  );
+  border-radius: 1px;
+}
+
+/* Fragments from shot hits — slightly transparent */
+.fallen-logo-fragment {
+  opacity: 0.5;
+}
+
+/* --- Glowing fallen logo (power-up) --- */
+
+@keyframes logo-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(187, 196, 70, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(187, 196, 70, 1)) drop-shadow(0 0 28px rgba(255, 215, 0, 0.5));
+  }
+}
+
+.fallen-logo-glowing {
+  color: #bbc446 !important;
+  opacity: 1 !important;
+  animation: logo-glow-pulse 1.2s ease-in-out infinite;
+}
+
+/* --- Super Saiyan gnome --- */
+
+@keyframes saiyan-aura {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #bbc446) drop-shadow(0 0 4px rgba(187, 196, 70, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px #bbc446) drop-shadow(0 0 24px rgba(187, 196, 70, 0.6)) drop-shadow(0 0 4px #fff);
+  }
+}
+
+.gnome-super-saiyan {
+  animation: saiyan-aura 0.4s ease-in-out infinite;
+}
+
+/* --- Super Saiyan laser --- */
+
+@keyframes laser-flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.gnome-laser {
+  position: absolute;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(187, 196, 70, 0.9) 0%,
+    #bbc446 30%,
+    #ffd700 70%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  box-shadow: 0 0 8px #bbc446, 0 0 16px rgba(255, 215, 0, 0.5);
+  transform-origin: 0 50%;
+  pointer-events: none;
+  border-radius: 2px;
+  animation: laser-flash 0.3s ease-out forwards;
+}
+
 /* --- Edge impact sparks --- */
 
 @keyframes spark-fly {
