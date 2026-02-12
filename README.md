@@ -93,6 +93,10 @@ The escalation went something like this:
 
 Zero tests. Zero regrets.
 
+---
+
+Created by [David Fogl](https://github.com/xfoggi) @ [Continero](https://continero.com) | RF Board Member
+
 ## License
 
 MIT
