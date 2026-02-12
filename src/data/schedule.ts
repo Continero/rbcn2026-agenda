@@ -171,7 +171,7 @@ export const schedule: ScheduleItem[] = [
   {
     id: 1412218,
     code: "TXYFYE",
-    title: "Integrating Robot Framework in your business strategy",
+    title: "Integrating open source in your business strategy",
     abstract:
       "Like every open source tool Robot Framework is sometimes hard to fit in common corporate tool evaluations. There is no company behind it offering enterprise support. Even if governance for Robot Framework core may be achievable, the tool does not exist solely, but requires ecosystem projects that are entirely free.\r\n\r\nIn this talk, Markus is going to show ways how to mitigate the risks of adopting a free open source tool, how open source tool providers can improve governance of their prjects and how companies can contribute in different ways for their own direct benefit.",
     speakerCodes: ["FJSLFM"],
