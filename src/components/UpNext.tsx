@@ -10,8 +10,7 @@ interface UpNextProps {
 }
 
 export function UpNext({ items }: UpNextProps) {
-  const visible = items.slice(0, 7);
-  const firstTalkId = visible.find((item) => !item.isBreak && item.abstract)?.id ?? null;
+  const firstTalkId = items.find((item) => !item.isBreak && item.abstract)?.id ?? null;
   const [expandedId, setExpandedId] = useState<number | null>(firstTalkId);
   const prevFirstId = useRef(firstTalkId);
 
@@ -22,7 +21,7 @@ export function UpNext({ items }: UpNextProps) {
     }
   }, [firstTalkId]);
 
-  if (visible.length === 0) return null;
+  if (items.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-3 lg:gap-4 h-full">
@@ -33,7 +32,7 @@ export function UpNext({ items }: UpNextProps) {
         Up Next
       </h3>
       <div className="flex flex-col flex-1 lg:overflow-hidden overflow-y-auto">
-        {visible.map((item, idx) => (
+        {items.map((item, idx) => (
           <UpNextItem
             key={item.id}
             item={item}
@@ -43,11 +42,6 @@ export function UpNext({ items }: UpNextProps) {
           />
         ))}
       </div>
-      {items.length > 7 && (
-        <p className="text-cyan-30 text-sm lg:text-base text-center shrink-0 mt-1 lg:mt-2">
-          +{items.length - 7} more
-        </p>
-      )}
     </div>
   );
 }
