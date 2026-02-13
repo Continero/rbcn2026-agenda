@@ -131,6 +131,13 @@
 - CSS-only firework particle bursts at high intensity, increasing frequency
 - Intensity ramps 0→0.8 during approach, jumps to 1.0 when party is live
 
+**~14:00** — "Add countdown to after-party start"
+- HH:MM:SS countdown displayed in the after-party Up Next card
+- Digits color-cycle independently through disco palette, faster as time nears
+- Font size scales with intensity (1.5rem → 3rem)
+- Gentle pulse animation at high intensity
+- Shows "PARTY TIME!" when countdown hits zero
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**

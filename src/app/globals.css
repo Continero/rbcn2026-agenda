@@ -135,3 +135,13 @@ html, body {
   z-index: 10;
   animation: firework-burst 0.8s ease-out forwards;
 }
+
+/* Countdown pulse */
+@keyframes countdown-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.countdown-pulse {
+  animation: countdown-pulse 1.5s ease-in-out infinite;
+}

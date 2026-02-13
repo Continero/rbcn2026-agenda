@@ -5,6 +5,7 @@ import { ScheduleItem } from "@/data/schedule";
 import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
 import { DiscoEffect } from "./DiscoEffect";
+import { PartyCountdown } from "./PartyCountdown";
 
 interface UpNextProps {
   items: ScheduleItem[];
@@ -48,6 +49,7 @@ export function UpNext({ items, partyIntensity = 0 }: UpNextProps) {
               isFirst={idx === 0}
               isExpanded={expandedId === item.id || item.id === karaokeId}
               onToggle={() => setExpandedId(expandedId === item.id ? null : item.id)}
+              partyIntensity={isParty ? partyIntensity : 0}
             />
           );
           if (isParty && partyIntensity > 0) {
@@ -65,11 +67,13 @@ function UpNextItem({
   isFirst,
   isExpanded,
   onToggle,
+  partyIntensity = 0,
 }: {
   item: ScheduleItem;
   isFirst: boolean;
   isExpanded: boolean;
   onToggle: () => void;
+  partyIntensity?: number;
 }) {
   const itemSpeakers = item.speakerCodes
     .map((code) => speakers[code])
@@ -124,6 +128,9 @@ function UpNextItem({
             <p className="text-sm text-cyan-30 leading-relaxed mt-2 pr-2">
               {cleanAbstract(item.abstract)}
             </p>
+          )}
+          {partyIntensity > 0 && (
+            <PartyCountdown partyStart={item.start} intensity={partyIntensity} />
           )}
         </div>
         <span className="text-sm lg:text-base text-cyan-30 shrink-0 mt-1 tabular-nums">
