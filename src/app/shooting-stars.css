@@ -327,6 +327,28 @@
   border-top-color: rgba(232, 54, 93, 0.4);
 }
 
+/* --- Gnome named bubbles (Kelby & Elout) --- */
+
+.gnome-bubble-kelby {
+  background: rgba(204, 68, 68, 0.15);
+  border: 1px solid rgba(204, 68, 68, 0.4);
+  color: rgba(255, 200, 200, 0.9);
+}
+
+.gnome-bubble-kelby::after {
+  border-top-color: rgba(204, 68, 68, 0.4);
+}
+
+.gnome-bubble-elout {
+  background: rgba(74, 140, 63, 0.15);
+  border: 1px solid rgba(74, 140, 63, 0.4);
+  color: rgba(200, 240, 200, 0.9);
+}
+
+.gnome-bubble-elout::after {
+  border-top-color: rgba(74, 140, 63, 0.4);
+}
+
 /* --- Edge impact sparks --- */
 
 @keyframes spark-fly {

@@ -486,6 +486,7 @@ interface FallenLogo {
 }
 
 interface Gnome {
+  name: 'kelby' | 'elout';
   x: number;
   direction: number; // 1 = right, -1 = left
   body: Matter.Body;
@@ -720,7 +721,7 @@ export function ShootingStars() {
     }
 
     // --- Gnomes setup ---
-    function createGnome(hatColor: string, startX: number, direction: number): Gnome {
+    function createGnome(name: Gnome['name'], hatColor: string, startX: number, direction: number): Gnome {
       // Physics body — static, moved manually to push fallen logos
       const gnomeY = h - GNOME_H / 2;
       const body = Matter.Bodies.rectangle(startX, gnomeY, GNOME_W, GNOME_H, {
@@ -736,7 +737,7 @@ export function ShootingStars() {
       el.innerHTML = gnomeSvg(hatColor);
       container!.appendChild(el);
 
-      return { x: startX, direction, body, el, frame: 0, bubbleEl: null, eating: false, eatFrame: 0, eatCooldown: 0, superSaiyan: false, superSaiyanFrame: 0, shootFrame: 0 };
+      return { name, x: startX, direction, body, el, frame: 0, bubbleEl: null, eating: false, eatFrame: 0, eatCooldown: 0, superSaiyan: false, superSaiyanFrame: 0, shootFrame: 0 };
     }
 
     // Show a speech bubble above a gnome
@@ -746,11 +747,12 @@ export function ShootingStars() {
 
       const msg = customMsg || GNOME_MESSAGES[Math.floor(Math.random() * GNOME_MESSAGES.length)];
       const bubble = document.createElement("div");
-      const classes = ["gnome-bubble"];
+      const classes = ["gnome-bubble", `gnome-bubble-${gnome.name}`];
       if (mega) classes.push("gnome-bubble-mega");
       if (shiny) classes.push("gnome-bubble-shiny");
       bubble.className = classes.join(" ");
-      bubble.textContent = msg;
+      const displayName = { kelby: 'Kelby', elout: 'Elout' }[gnome.name];
+      bubble.innerHTML = `<span class="person-bubble-name">${displayName}:</span> ${msg}`;
       container!.appendChild(bubble);
       gnome.bubbleEl = bubble;
 
@@ -790,10 +792,10 @@ export function ShootingStars() {
       }, duration);
     }
 
-    // Two gnomes: red hat starts left, green hat starts right
+    // Two gnomes: Kelby (red hat) starts left, Elout (green hat) starts right
     const gnomes: Gnome[] = [
-      createGnome("#cc4444", w * 0.25, 1),
-      createGnome("#4a8c3f", w * 0.75, -1),
+      createGnome("kelby", "#cc4444", w * 0.25, 1),
+      createGnome("elout", "#4a8c3f", w * 0.75, -1),
     ];
 
     // Three persons: Pekka left, Mikka center, René right
@@ -949,7 +951,7 @@ export function ShootingStars() {
         setTimeout(() => plate.remove(), (PANCAKE_DURATION / FPS) * 1000 + 500);
 
         // Shiny pancake bubble on both gnomes
-        const pancakeMessages = ["nom nom, wow pancakes from Kelby! 🥞✨", "mmm Kelby's pancakes! 🥞"];
+        const pancakeMessages = ["nom nom, fresh pancakes! 🥞✨", "mmm so delicious! 🥞"];
         showBubble(g0, pancakeMessages[0], (PANCAKE_DURATION / FPS) * 1000, false, true);
         setTimeout(() => showBubble(g1, pancakeMessages[1], (PANCAKE_DURATION / FPS) * 800, false, true), 600);
 

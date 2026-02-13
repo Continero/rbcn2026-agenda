@@ -119,9 +119,14 @@
 - Golden shimmer highlight (same as karaoke), always-expanded abstract
 - Disco ball emoji in title
 
+**~13:00** — "Name the gnomes: Kelby (red hat) and Elout (green hat)"
+- Gnome speech bubbles now show names as prefix (like Pekka/René/Mikka)
+- Color-coded bubble styles: red-tinted for Kelby, green-tinted for Elout
+- Names appear in random messages, song duets, and pancake scenes
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**
 
 The escalation path:
-> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk**
+> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk** -> **named gnomes (Kelby & Elout)**
