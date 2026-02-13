@@ -40,7 +40,6 @@ A real-time conference agenda that knows what's happening now, what's coming up,
 - **Super Saiyan mode** — picking up a golden logo triggers: 1.5x size, 3x speed, golden aura, explosive push on nearby logos, and instant gold laser shots that always hit
 - **Singing duets** — gnomes alternate lines from well-known songs every 2 minutes:
   - Bohemian Rhapsody, Never Gonna Give You Up, We Will Rock You, Don't Stop Believin', Hakuna Matata, YMCA, Baby Shark
-- **Karaoke announcements** — gold mega-bubbles promoting the evening karaoke party
 
 ### Special Events
 - **Community Dinner** at Ravintola Laulu with venue details and meetup info

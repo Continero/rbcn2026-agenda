@@ -95,9 +95,14 @@
 - Fixed karaoke time to 20:30
 - Fixed overlapping speech bubbles
 
+## Day 4: Thursday Feb 13 — Conference Day 2
+
+**~09:00** — "Remove the karaoke announcements, no karaoke today"
+- Removed karaoke mega-announcement system from gnomes
+
 ---
 
-**Total: ~2 evenings + 1 conference day of vibe coding**
+**Total: ~2 evenings + 2 conference days of vibe coding**
 
 The escalation path:
 > schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby
