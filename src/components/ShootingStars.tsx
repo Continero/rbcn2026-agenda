@@ -522,8 +522,32 @@ interface Projectile {
   age: number;
 }
 
-export function ShootingStars() {
+const RF_KEYWORDS = [
+  "*** Test Cases ***", "*** Settings ***", "*** Keywords ***",
+  "Log", "Should Be Equal", "Click Element", "Wait Until",
+  "Open Browser", "Close Browser", "Input Text", "Sleep",
+  "Run Keyword If", "FOR", "END", "TRY", "EXCEPT",
+  "Set Variable", "Get Text", "${result}", "@{list}",
+  "Library  SeleniumLibrary", "Resource  common.robot",
+  "[Setup]", "[Teardown]", "[Tags]  smoke",
+  "PASS", "FAIL", "SKIP", "robot:skip",
+  "Should Contain", "Should Not Be Empty",
+  "Wait Until Element Is Visible", "Capture Page Screenshot",
+];
+
+const CHAOS_COLORS = [
+  "#ff1493", "#00ff87", "#ffdd00", "#ff6b35",
+  "#00d4ff", "#bf5fff", "#ff4444", "#44ff44",
+];
+
+interface ShootingStarsProps {
+  partyIntensity?: number;
+}
+
+export function ShootingStars({ partyIntensity = 0 }: ShootingStarsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const intensityRef = useRef(partyIntensity);
+  intensityRef.current = partyIntensity;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -846,10 +870,19 @@ export function ShootingStars() {
       lastSongIdx = idx;
       const song = SONGS[idx];
 
+      // Pick two singers — during chaos, pick from all gnomes
+      const allSingers = chaosActivated ? [...gnomes, ...chaosGnomes] : gnomes;
+      const singerA = allSingers[Math.floor(Math.random() * allSingers.length)];
+      let singerB = allSingers[Math.floor(Math.random() * allSingers.length)];
+      if (singerB === singerA && allSingers.length > 1) {
+        singerB = allSingers[(allSingers.indexOf(singerA) + 1) % allSingers.length];
+      }
+      const singers = [singerA, singerB];
+
       // Schedule each line
       song.forEach((line, i) => {
         const tid = setTimeout(() => {
-          showBubble(gnomes[line.gnome], line.text, 2000);
+          showBubble(singers[line.gnome], line.text, 2000);
         }, i * SONG_LINE_MS);
         songTimeouts.push(tid);
       });
@@ -902,6 +935,135 @@ export function ShootingStars() {
     const firstConvoTid = setTimeout(playConversation, (15000 + Math.random() * 10000) / timeBoost);
     personConvoTimeouts.push(firstConvoTid);
 
+    // --- CHAOS MODE ---
+    let chaosActivated = false;
+    const chaosIntervals: ReturnType<typeof setInterval>[] = [];
+    const chaosTimeouts: ReturnType<typeof setTimeout>[] = [];
+    let chaosGnomes: Gnome[] = [];
+
+    function activateChaos() {
+      if (chaosActivated) return;
+      chaosActivated = true;
+
+      // 1. CONFETTI CANNON — continuous colorful particles from top
+      const confettiInterval = setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          const el = document.createElement("div");
+          el.className = "confetti";
+          const color = CHAOS_COLORS[Math.floor(Math.random() * CHAOS_COLORS.length)];
+          const x = Math.random() * w;
+          const size = 4 + Math.random() * 6;
+          const duration = 2.5 + Math.random() * 2;
+          const rot = 360 + Math.random() * 720;
+          const shape = Math.random() > 0.5 ? "50%" : "0";
+          el.style.cssText = `
+            left: ${x}px; top: -10px;
+            width: ${size}px; height: ${size * 0.6}px;
+            background: ${color};
+            border-radius: ${shape};
+            --confetti-dy: ${h + 20}px;
+            --confetti-rot: ${rot}deg;
+            --confetti-duration: ${duration}s;
+          `;
+          container!.appendChild(el);
+          setTimeout(() => el.remove(), duration * 1000);
+        }
+      }, 100);
+      chaosIntervals.push(confettiInterval);
+
+      // 3. LASER SHOW — sweeping colored beams from top corners
+      const laserColors = ["#ff1493", "#00d4ff", "#44ff44", "#bf5fff", "#ffdd00", "#ff6b35"];
+      for (let i = 0; i < 6; i++) {
+        const laser = document.createElement("div");
+        laser.className = "chaos-laser";
+        const fromLeft = i % 2 === 0;
+        const fromDeg = fromLeft ? -40 + i * 5 : 10 - i * 5;
+        const toDeg = fromDeg + (fromLeft ? 50 : -50);
+        laser.style.cssText = `
+          left: ${fromLeft ? 0 : w}px; top: 0;
+          background: ${laserColors[i]};
+          opacity: 0.4;
+          --laser-from: ${fromDeg}deg;
+          --laser-to: ${toDeg}deg;
+          --laser-speed: ${3 + i * 0.7}s;
+          animation-delay: ${i * 0.5}s;
+        `;
+        container!.appendChild(laser);
+      }
+
+      // 5. GNOME ARMY — spawn 6 extra gnomes
+      const extraHats = ["#ff1493", "#00d4ff", "#ffdd00", "#bf5fff", "#ff6b35", "#44ff44"];
+      const extraNames: Array<Gnome['name']> = ["kelby", "elout", "kelby", "elout", "kelby", "elout"];
+      for (let i = 0; i < 6; i++) {
+        const startX = (w / 8) * (i + 1);
+        const dir = i % 2 === 0 ? 1 : -1;
+        const g = createGnome(extraNames[i], extraHats[i], startX, dir);
+        chaosGnomes.push(g);
+      }
+
+      // 6. SPEED RAVE — clear old timers, restart with much faster intervals
+      clearTimeout(songTimerId);
+      clearTimeout(bubbleTimerId);
+      songTimeouts.forEach(clearTimeout);
+
+      // Songs every 15 seconds
+      function chaosScheduleSong() {
+        songTimerId = setTimeout(() => {
+          playSong();
+          chaosScheduleSong();
+        }, 15000 / timeBoost);
+      }
+      chaosScheduleSong();
+
+      // Bubbles every 5 seconds
+      function chaosScheduleBubble() {
+        bubbleTimerId = setTimeout(() => {
+          const allGnomes = [...gnomes, ...chaosGnomes];
+          const g = allGnomes[Math.floor(Math.random() * allGnomes.length)];
+          showBubble(g);
+          chaosScheduleBubble();
+        }, 5000 / timeBoost);
+      }
+      chaosScheduleBubble();
+
+      // 7. DANCE PARTY — stop eating (bounce handled in JS animation loop)
+      for (const g of gnomes) {
+        g.eating = false;
+        g.eatCooldown = 999999;
+      }
+
+      // 10. KEYWORD RAIN — Matrix-style falling RF keywords
+      const kwInterval = setInterval(() => {
+        const kw = RF_KEYWORDS[Math.floor(Math.random() * RF_KEYWORDS.length)];
+        const el = document.createElement("div");
+        el.className = "keyword-rain";
+        const x = Math.random() * (w - 100);
+        const color = CHAOS_COLORS[Math.floor(Math.random() * CHAOS_COLORS.length)];
+        const duration = 4 + Math.random() * 4;
+        el.textContent = kw;
+        el.style.cssText = `
+          left: ${x}px; top: -20px;
+          color: ${color};
+          opacity: 0.5;
+          --kw-dy: ${h + 40}px;
+          --kw-duration: ${duration}s;
+        `;
+        container!.appendChild(el);
+        setTimeout(() => el.remove(), duration * 1000);
+      }, 300);
+      chaosIntervals.push(kwInterval);
+    }
+
+    // Poll for chaos activation
+    const chaosCheckInterval = setInterval(() => {
+      if (intensityRef.current >= 1 && !chaosActivated) {
+        activateChaos();
+      }
+    }, 1000);
+
+    // Activate immediately if already partying
+    if (intensityRef.current >= 1) activateChaos();
+
     // --- Animation loop ---
     let frameId: number;
     function update() {
@@ -933,7 +1095,7 @@ export function ShootingStars() {
       const g1 = gnomes[1];
       const gnomeDistance = Math.abs(g0.x - g1.x);
 
-      if (!g0.eating && !g1.eating && !g0.superSaiyan && !g1.superSaiyan && g0.eatCooldown <= 0 && g1.eatCooldown <= 0 && gnomeDistance < GNOME_MEET_DISTANCE) {
+      if (!chaosActivated && !g0.eating && !g1.eating && !g0.superSaiyan && !g1.superSaiyan && g0.eatCooldown <= 0 && g1.eatCooldown <= 0 && gnomeDistance < GNOME_MEET_DISTANCE) {
         // Sit down and eat pancakes!
         g0.eating = true;
         g1.eating = true;
@@ -1082,8 +1244,10 @@ export function ShootingStars() {
             }
           }
 
-          // Bobbing walk animation
-          const bob = Math.sin(gnome.frame * 0.15) * (gnome.superSaiyan ? 4 : 2);
+          // Bobbing walk animation + chaos dance bounce
+          const baseBob = Math.sin(gnome.frame * 0.15) * (gnome.superSaiyan ? 4 : 2);
+          const danceBob = chaosActivated ? Math.abs(Math.sin(gnome.frame * 0.3)) * -12 : 0;
+          const bob = baseBob + danceBob;
           const scaleX = gnome.direction >= 0 ? 1 : -1;
           const gnomeVisualY = gnomeY - (GNOME_H * scaleMult) / 2 + bob;
 
@@ -1122,8 +1286,10 @@ export function ShootingStars() {
           person.direction = 1;
         }
 
-        // Bobbing animation
-        const bob = Math.sin(person.frame * 0.12) * 1.5;
+        // Bobbing animation + chaos dance bounce
+        const baseBob = Math.sin(person.frame * 0.12) * 1.5;
+        const danceBob = chaosActivated ? Math.abs(Math.sin(person.frame * 0.3)) * -12 : 0;
+        const bob = baseBob + danceBob;
         const scaleX = person.direction >= 0 ? 1 : -1;
         const personVisualY = personY - GNOME_H / 2 + bob;
 
@@ -1148,6 +1314,33 @@ export function ShootingStars() {
           }
           person.bubbleEl.style.left = `${clampedX}px`;
           person.bubbleEl.style.top = `${personVisualY - 30 - staggerOffset}px`;
+        }
+      }
+
+      // --- Update chaos gnomes (simple walk + bounce) ---
+      for (const cg of chaosGnomes) {
+        cg.frame++;
+        const chaosSpeed = GNOME_SPEED * 3; // triple speed
+        cg.x += chaosSpeed * cg.direction;
+        if (cg.x >= w - GNOME_MARGIN) cg.direction = -1;
+        else if (cg.x <= GNOME_MARGIN) cg.direction = 1;
+
+        const cgY = h - GNOME_H / 2;
+        const baseBob = Math.sin(cg.frame * 0.25) * 3;
+        const danceBob = Math.abs(Math.sin(cg.frame * 0.3)) * -12;
+        const bob = baseBob + danceBob;
+        const scaleX = cg.direction >= 0 ? 1 : -1;
+        const cgVisualY = cgY - GNOME_H / 2 + bob;
+        cg.el.style.transform = `translate(${cg.x - GNOME_W / 2}px, ${cgVisualY}px) scaleX(${scaleX})`;
+        Matter.Body.setPosition(cg.body, { x: cg.x, y: cgY });
+        Matter.Body.setVelocity(cg.body, { x: chaosSpeed * cg.direction * 2, y: 0 });
+
+        // Position bubble above chaos gnome
+        if (cg.bubbleEl) {
+          const bw = cg.bubbleEl.offsetWidth;
+          const clampedX = Math.max(bw / 2 + 4, Math.min(cg.x, w - bw / 2 - 4));
+          cg.bubbleEl.style.left = `${clampedX}px`;
+          cg.bubbleEl.style.top = `${cgVisualY - 30}px`;
         }
       }
 
@@ -1326,6 +1519,9 @@ export function ShootingStars() {
       clearTimeout(songTimerId);
       songTimeouts.forEach(clearTimeout);
       personConvoTimeouts.forEach(clearTimeout);
+      clearInterval(chaosCheckInterval);
+      chaosIntervals.forEach(clearInterval);
+      chaosTimeouts.forEach(clearTimeout);
       window.removeEventListener("resize", handleResize);
       Matter.Engine.clear(engine);
       while (container.firstChild) {

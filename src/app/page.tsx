@@ -35,9 +35,9 @@ export default function Home() {
   return (
     <div className="w-screen min-h-screen lg:h-screen bg-navy lg:overflow-hidden flex justify-center">
       <AuroraBackground pulse={auroraPulse} />
-      <ShootingStars />
+      <ShootingStars partyIntensity={partyIntensity} />
       <div className="w-full lg:w-[75%] h-full flex flex-col lg:overflow-hidden relative z-10">
-      <Header now={now} dayLabel={state.dayLabel} />
+      <Header now={now} dayLabel={state.dayLabel} partyIntensity={partyIntensity} />
 
       <main className="flex-1 flex flex-col lg:overflow-hidden lg:min-h-0 px-4 py-4 gap-5 sm:px-6 sm:py-6 sm:gap-6 lg:px-20 lg:py-10 lg:gap-10">
         {state.isBeforeStart ? (

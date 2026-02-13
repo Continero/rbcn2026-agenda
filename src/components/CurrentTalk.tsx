@@ -78,17 +78,17 @@ export function CurrentTalk({ item, progress, partyIntensity = 0 }: CurrentTalkP
           </p>
         )}
         {isAfterParty && (
-          <div className="flex items-center gap-3 mt-2">
-            <div className="rounded-lg bg-white p-6">
+          <div className="flex flex-col items-center gap-3 mt-4">
+            <div className="rounded-xl bg-white p-6">
               <QRCodeSVG
                 value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
-                size={120}
+                size={160}
                 bgColor="#ffffff"
                 fgColor="#000011"
                 level="M"
               />
             </div>
-            <span className="text-xs lg:text-sm text-cyan-30 uppercase tracking-widest">
+            <span className="text-sm lg:text-base text-cyan-60 uppercase tracking-[0.2em] font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
               Scan for directions
             </span>
           </div>

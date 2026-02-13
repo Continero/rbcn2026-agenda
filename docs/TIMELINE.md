@@ -143,9 +143,20 @@
 - Small (64px) in UpNext next to countdown, larger (80px) in NOW card
 - "Location" / "Scan for directions" labels
 
+**~15:00** — "COMPLETE CHAOS MODE for end of conference"
+- Activates when after-party becomes the NOW item:
+  1. Confetti cannon — continuous rainbow particles raining from top
+  3. Laser show — 6 colored beams sweeping from screen corners
+  4. Disco ball — spinning SVG ball with 15 scattered colored reflections
+  5. Gnome army — 6 extra gnomes in disco colors flood the bottom
+  6. Speed rave — songs every 15s, bubbles every 5s, gnomes at 3x speed
+  7. Dance party — all characters bounce with synchronized dance animation
+  9. Glitch header — "ROBOCON 2026" text glitches with color splits and skew
+  10. Keyword rain — Matrix-style falling Robot Framework keywords
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**
 
 The escalation path:
-> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk** -> **named gnomes (Kelby & Elout)** -> **DISCO PARTY MODE**
+> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk** -> **named gnomes (Kelby & Elout)** -> **DISCO PARTY MODE** -> **TOTAL CHAOS**

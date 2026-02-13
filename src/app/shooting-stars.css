@@ -372,3 +372,101 @@
   pointer-events: none;
   animation: spark-fly 0.5s ease-out forwards;
 }
+
+/* === CHAOS MODE === */
+
+/* Confetti */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--confetti-dy, 800px)) rotate(var(--confetti-rot, 720deg));
+    opacity: 0.3;
+  }
+}
+
+.confetti {
+  position: absolute;
+  pointer-events: none;
+  animation: confetti-fall var(--confetti-duration, 3s) linear forwards;
+}
+
+/* Laser beams */
+@keyframes laser-sweep {
+  0%   { transform: rotate(var(--laser-from, -30deg)); opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.7; }
+  100% { transform: rotate(var(--laser-to, 30deg)); opacity: 0; }
+}
+
+.chaos-laser {
+  position: absolute;
+  width: 2px;
+  height: 100vh;
+  transform-origin: top center;
+  pointer-events: none;
+  animation: laser-sweep var(--laser-speed, 4s) ease-in-out infinite;
+}
+
+/* Disco ball */
+@keyframes disco-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes disco-reflection {
+  0%   { opacity: 0.8; transform: translate(var(--ref-x1), var(--ref-y1)); }
+  50%  { opacity: 0.3; transform: translate(var(--ref-x2), var(--ref-y2)); }
+  100% { opacity: 0.8; transform: translate(var(--ref-x1), var(--ref-y1)); }
+}
+
+.disco-ball {
+  position: absolute;
+  pointer-events: none;
+}
+
+.disco-ball-inner {
+  animation: disco-spin 3s linear infinite;
+}
+
+.disco-reflection {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: disco-reflection var(--ref-speed, 3s) ease-in-out infinite;
+}
+
+/* Character dance bounce */
+@keyframes chaos-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.chaos-dance {
+  animation: chaos-bounce 0.4s ease-in-out infinite;
+}
+
+/* Keyword rain */
+@keyframes keyword-fall {
+  0% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(var(--kw-dy, 800px));
+    opacity: 0;
+  }
+}
+
+.keyword-rain {
+  position: absolute;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 11px;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: keyword-fall var(--kw-duration, 6s) linear forwards;
+}

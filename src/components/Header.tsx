@@ -5,9 +5,10 @@ import { formatCurrentTime, formatCurrentDate } from "@/lib/schedule-utils";
 interface HeaderProps {
   now: Date;
   dayLabel: string;
+  partyIntensity?: number;
 }
 
-export function Header({ now, dayLabel }: HeaderProps) {
+export function Header({ now, dayLabel, partyIntensity = 0 }: HeaderProps) {
   return (
     <header className="flex flex-col gap-3 lg:gap-5 px-4 sm:px-6 lg:px-0 pt-4 pb-3 lg:pt-10 lg:pb-8 border-b border-cyan-10 shrink-0">
       {/* Top row: logo + title */}
@@ -16,7 +17,7 @@ export function Header({ now, dayLabel }: HeaderProps) {
           <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14 shrink-0">
             <RoboConLogo />
           </div>
-          <h1 className="text-lg sm:text-xl lg:text-3xl font-bold tracking-[0.15em] text-cyan uppercase" style={{ fontFamily: "var(--font-heading)" }}>
+          <h1 className={`text-lg sm:text-xl lg:text-3xl font-bold tracking-[0.15em] text-cyan uppercase ${partyIntensity >= 1 ? "header-glitch" : ""}`} style={{ fontFamily: "var(--font-heading)" }}>
             RoboCon 2026
           </h1>
         </div>
