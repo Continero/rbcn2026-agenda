@@ -114,6 +114,11 @@
 - 10 new conversations about sponsor hunting, board meetings, action items, and open source budgets
 - Pink bubble color matching the hoodie
 
+**~11:00** — "Add after-party to agenda"
+- VALA-hosted after-party at Erottajankatu 11 B 9, Helsinki
+- Golden shimmer highlight (same as karaoke), always-expanded abstract
+- Disco ball emoji in title
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**

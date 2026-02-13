@@ -11,7 +11,11 @@ interface UpNextProps {
 
 export function UpNext({ items }: UpNextProps) {
   const firstTalkId = items.find((item) => !item.isBreak && item.abstract)?.id ?? null;
-  const karaokeId = items.find((item) => item.title.toLowerCase().includes("karaoke"))?.id ?? null;
+  const isSpecialEvent = (item: ScheduleItem) => {
+    const t = item.title.toLowerCase();
+    return t.includes("karaoke") || t.includes("after-party");
+  };
+  const karaokeId = items.find((item) => isSpecialEvent(item))?.id ?? null;
   const [expandedId, setExpandedId] = useState<number | null>(firstTalkId);
   const prevFirstId = useRef(firstTalkId);
 
@@ -63,7 +67,10 @@ function UpNextItem({
     .filter(Boolean);
 
   const hasAbstract = !item.isBreak && !!item.abstract;
-  const isHighlight = item.title.toLowerCase().includes("karaoke");
+  const isHighlight = (() => {
+    const t = item.title.toLowerCase();
+    return t.includes("karaoke") || t.includes("after-party");
+  })();
 
   return (
     <div
