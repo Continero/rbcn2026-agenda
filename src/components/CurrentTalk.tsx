@@ -6,6 +6,7 @@ import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
 import { ProgressBar } from "./ProgressBar";
 import { DiscoEffect } from "./DiscoEffect";
+import { QRCodeSVG } from "qrcode.react";
 
 interface CurrentTalkProps {
   item: ScheduleItem;
@@ -75,6 +76,22 @@ export function CurrentTalk({ item, progress, partyIntensity = 0 }: CurrentTalkP
           <p className="text-sm lg:text-base text-cyan-30 leading-relaxed">
             {cleanAbstract(item.abstract)}
           </p>
+        )}
+        {isAfterParty && (
+          <div className="flex items-center gap-3 mt-2">
+            <div className="rounded-lg bg-white p-2">
+              <QRCodeSVG
+                value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
+                size={80}
+                bgColor="#ffffff"
+                fgColor="#000011"
+                level="M"
+              />
+            </div>
+            <span className="text-xs lg:text-sm text-cyan-30 uppercase tracking-widest">
+              Scan for directions
+            </span>
+          </div>
         )}
       </div>
     </div>

@@ -138,6 +138,11 @@
 - Gentle pulse animation at high intensity
 - Shows "PARTY TIME!" when countdown hits zero
 
+**~14:10** — "Add QR code for after-party location (Google Maps)"
+- QR code linking to VALA office on Google Maps in both UpNext and NOW cards
+- Small (64px) in UpNext next to countdown, larger (80px) in NOW card
+- "Location" / "Scan for directions" labels
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**

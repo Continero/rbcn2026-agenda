@@ -6,6 +6,7 @@ import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
 import { DiscoEffect } from "./DiscoEffect";
 import { PartyCountdown } from "./PartyCountdown";
+import { QRCodeSVG } from "qrcode.react";
 
 interface UpNextProps {
   items: ScheduleItem[];
@@ -80,10 +81,9 @@ function UpNextItem({
     .filter(Boolean);
 
   const hasAbstract = !item.isBreak && !!item.abstract;
-  const isHighlight = (() => {
-    const t = item.title.toLowerCase();
-    return t.includes("karaoke") || t.includes("after-party");
-  })();
+  const t = item.title.toLowerCase();
+  const isHighlight = t.includes("karaoke") || t.includes("after-party");
+  const isAfterParty = t.includes("after-party");
 
   return (
     <div
@@ -129,8 +129,28 @@ function UpNextItem({
               {cleanAbstract(item.abstract)}
             </p>
           )}
-          {partyIntensity > 0 && (
-            <PartyCountdown partyStart={item.start} intensity={partyIntensity} />
+          {isAfterParty && (
+            <div className="flex items-center gap-4 mt-3">
+              <div className="flex-1">
+                {partyIntensity > 0 && (
+                  <PartyCountdown partyStart={item.start} intensity={partyIntensity} />
+                )}
+              </div>
+              <div className="flex flex-col items-center gap-1 shrink-0">
+                <div className="rounded-lg bg-white p-1.5">
+                  <QRCodeSVG
+                    value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
+                    size={64}
+                    bgColor="#ffffff"
+                    fgColor="#000011"
+                    level="M"
+                  />
+                </div>
+                <span className="text-[9px] text-cyan-30 uppercase tracking-widest">
+                  Location
+                </span>
+              </div>
+            </div>
           )}
         </div>
         <span className="text-sm lg:text-base text-cyan-30 shrink-0 mt-1 tabular-nums">
