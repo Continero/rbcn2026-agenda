@@ -140,7 +140,7 @@ function UpNextItem({
                 <div className="rounded-lg bg-white p-5">
                   <QRCodeSVG
                     value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
-                    size={64}
+                    size={100}
                     bgColor="#ffffff"
                     fgColor="#000011"
                     level="M"

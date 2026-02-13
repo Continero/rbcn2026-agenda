@@ -82,7 +82,7 @@ export function CurrentTalk({ item, progress, partyIntensity = 0 }: CurrentTalkP
             <div className="rounded-lg bg-white p-6">
               <QRCodeSVG
                 value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
-                size={80}
+                size={120}
                 bgColor="#ffffff"
                 fgColor="#000011"
                 level="M"
