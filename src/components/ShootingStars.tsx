@@ -990,12 +990,20 @@ export function ShootingStars() {
           Matter.Body.setPosition(gnome.body, { x: gnome.x, y: gnomeY });
           Matter.Body.setVelocity(gnome.body, { x: 0, y: 0 });
 
-          // Position bubble — stagger if other gnome also has a bubble nearby
+          // Position bubble — stagger if other gnome or person has a bubble nearby
           if (gnome.bubbleEl) {
             const bubbleY = gnomeVisualY - 30;
-            const otherHasBubble = otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 120;
+            let gnomeBubbleOffset = 0;
+            if (otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 160 && gnome === g1) {
+              gnomeBubbleOffset += otherGnome.bubbleEl.offsetHeight + 6;
+            }
+            for (const p of persons) {
+              if (p.bubbleEl && Math.abs(p.x - gnome.x) < 160) {
+                gnomeBubbleOffset += p.bubbleEl.offsetHeight + 6;
+              }
+            }
             gnome.bubbleEl.style.left = `${gnome.x}px`;
-            gnome.bubbleEl.style.top = `${bubbleY - (otherHasBubble && gnome === g1 ? 28 : 0)}px`;
+            gnome.bubbleEl.style.top = `${bubbleY - gnomeBubbleOffset}px`;
           }
 
           // End eating after duration
@@ -1079,12 +1087,20 @@ export function ShootingStars() {
 
           gnome.el.style.transform = `translate(${gnome.x - (GNOME_W * scaleMult) / 2}px, ${gnomeVisualY}px) scale(${scaleX * scaleMult}, ${scaleMult})`;
 
-          // Position bubble above gnome — stagger if other gnome has bubble nearby
+          // Position bubble above gnome — stagger if other gnome or person has bubble nearby
           if (gnome.bubbleEl) {
             const bubbleY = gnomeVisualY - 30;
-            const otherHasBubble = otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 120;
+            let gnomeBubbleOffset = 0;
+            if (otherGnome.bubbleEl && Math.abs(otherGnome.x - gnome.x) < 160 && gnome === g1) {
+              gnomeBubbleOffset += otherGnome.bubbleEl.offsetHeight + 6;
+            }
+            for (const p of persons) {
+              if (p.bubbleEl && Math.abs(p.x - gnome.x) < 160) {
+                gnomeBubbleOffset += p.bubbleEl.offsetHeight + 6;
+              }
+            }
             gnome.bubbleEl.style.left = `${gnome.x}px`;
-            gnome.bubbleEl.style.top = `${bubbleY - (otherHasBubble && gnome === g1 ? 28 : 0)}px`;
+            gnome.bubbleEl.style.top = `${bubbleY - gnomeBubbleOffset}px`;
           }
         }
       }
@@ -1115,12 +1131,17 @@ export function ShootingStars() {
         if (person.bubbleEl) {
           const bw = person.bubbleEl.offsetWidth;
           const clampedX = Math.max(bw / 2 + 4, Math.min(person.x, w - bw / 2 - 4));
-          // Count how many other persons with active bubbles are nearby and below in array order
+          // Stack above any nearby bubbles from other persons or gnomes
           let staggerOffset = 0;
           for (const other of persons) {
             if (other === person) break;
-            if (other.bubbleEl && Math.abs(other.x - person.x) < 140) {
-              staggerOffset += 28;
+            if (other.bubbleEl && Math.abs(other.x - person.x) < 160) {
+              staggerOffset += other.bubbleEl.offsetHeight + 6;
+            }
+          }
+          for (const gnome of gnomes) {
+            if (gnome.bubbleEl && Math.abs(gnome.x - person.x) < 160) {
+              staggerOffset += gnome.bubbleEl.offsetHeight + 6;
             }
           }
           person.bubbleEl.style.left = `${clampedX}px`;
