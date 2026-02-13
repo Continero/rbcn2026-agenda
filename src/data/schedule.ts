@@ -394,8 +394,8 @@ export const schedule: ScheduleItem[] = [
       "Join us for the RoboCon finale with prizes, appreciation, and a big thank-you to everyone who made this year\u2019s event a success.",
     speakerCodes: ["JDRR8S", "HTDUSJ", "FQJRHW"],
     start: "2026-02-13T14:40:00Z",
-    end: "2026-02-13T14:55:00Z",
-    duration: 20,
+    end: "2026-02-13T14:50:00Z",
+    duration: 10,
     isBreak: false,
   },
   {
@@ -403,9 +403,9 @@ export const schedule: ScheduleItem[] = [
     title: "🪩 After-Party — Hosted by VALA",
     abstract: "When the final talk wraps up, the celebration begins! Join us at the official after-party, hosted by our event sponsor VALA, at their office in Helsinki. This legendary gathering is the perfect chance to relax, connect with the community, share stories, and build new friendships in an informal atmosphere. Admission is included with your conference ticket, and complimentary food and drinks will be provided. 📍 VALA Group — Erottajankatu 11 B 9, 00130 Helsinki",
     speakerCodes: [],
-    start: "2026-02-13T15:00:00Z",
+    start: "2026-02-13T14:50:00Z",
     end: "2026-02-13T19:00:00Z",
-    duration: 240,
+    duration: 250,
     isBreak: false,
   },
 ];
