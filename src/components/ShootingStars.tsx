@@ -1111,12 +1111,20 @@ export function ShootingStars() {
 
         person.el.style.transform = `translate(${person.x - GNOME_W / 2}px, ${personVisualY}px) scaleX(${scaleX})`;
 
-        // Position bubble above person, clamped to screen
+        // Position bubble above person, clamped to screen, staggered if overlapping
         if (person.bubbleEl) {
           const bw = person.bubbleEl.offsetWidth;
           const clampedX = Math.max(bw / 2 + 4, Math.min(person.x, w - bw / 2 - 4));
+          // Count how many other persons with active bubbles are nearby and below in array order
+          let staggerOffset = 0;
+          for (const other of persons) {
+            if (other === person) break;
+            if (other.bubbleEl && Math.abs(other.x - person.x) < 140) {
+              staggerOffset += 28;
+            }
+          }
           person.bubbleEl.style.left = `${clampedX}px`;
-          person.bubbleEl.style.top = `${personVisualY - 30}px`;
+          person.bubbleEl.style.top = `${personVisualY - 30 - staggerOffset}px`;
         }
       }
 
