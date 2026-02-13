@@ -57,7 +57,7 @@ export default function Home() {
 
       {/* QR code — TV/desktop only, top-right corner */}
       <div className="hidden lg:flex fixed top-6 right-6 z-20 flex-col items-center gap-2">
-        <div className="rounded-xl bg-white p-4">
+        <div className="rounded-xl bg-white p-5">
           <QRCodeSVG
             value="https://robocon2026-agenda.netlify.app"
             size={100}

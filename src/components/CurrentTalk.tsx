@@ -79,7 +79,7 @@ export function CurrentTalk({ item, progress, partyIntensity = 0 }: CurrentTalkP
         )}
         {isAfterParty && (
           <div className="flex items-center gap-3 mt-2">
-            <div className="rounded-lg bg-white p-4">
+            <div className="rounded-lg bg-white p-6">
               <QRCodeSVG
                 value="https://maps.app.goo.gl/q1MtQjE2NJVWwutNA"
                 size={80}
