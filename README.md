@@ -41,11 +41,11 @@ A real-time conference agenda that knows what's happening now, what's coming up,
 - **Singing duets** — gnomes alternate lines from well-known songs every 2 minutes:
   - Bohemian Rhapsody, Never Gonna Give You Up, We Will Rock You, Don't Stop Believin', Hakuna Matata, YMCA, Baby Shark
 
-### Walking Characters (Pekka & René)
-- **Pekka Klärck** (Robot Framework creator) and **René Rohner** (RF Foundation Board Chairman) walk along the bottom
+### Walking Characters (Pekka, Mikka & René)
+- **Pekka Klärck** (RF creator), **Mikka Solmela** (RF Executive Director), and **René Rohner** (RF Foundation Board Chairman) walk along the bottom
 - Independent from gnomes — no shooting, no pancakes, no super saiyan
-- **Conversations** — alternating speech bubbles every ~1 minute with RF insider jokes, technical talk, and cultural humor
-- Distinct bubble colors: warm golden-brown (Pekka) and cool blue-purple (René)
+- **Conversations** — alternating speech bubbles every ~1 minute with RF insider jokes, technical talk, sponsor hunting, and board meeting humor
+- Distinct bubble colors: warm golden-brown (Pekka), pink (Mikka), and cool blue-purple (René)
 
 ### Special Events
 - **Community Dinner** at Ravintola Laulu with venue details and meetup info

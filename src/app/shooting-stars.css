@@ -314,6 +314,16 @@
   border-top-color: rgba(100, 100, 180, 0.4);
 }
 
+.person-bubble-mikka {
+  background: rgba(232, 54, 93, 0.15);
+  border: 1px solid rgba(232, 54, 93, 0.4);
+  color: rgba(255, 200, 210, 0.9);
+}
+
+.person-bubble-mikka::after {
+  border-top-color: rgba(232, 54, 93, 0.4);
+}
+
 /* --- Edge impact sparks --- */
 
 @keyframes spark-fly {

@@ -148,7 +148,7 @@ const GNOME_MESSAGES = [
 ];
 
 interface ConvoLine {
-  speaker: 'pekka' | 'rene';
+  speaker: 'pekka' | 'rene' | 'mikka';
   text: string;
 }
 
@@ -242,6 +242,67 @@ const CONVERSATIONS: ConvoLine[][] = [
     { speaker: 'rene', text: "That sounds terrible" },
     { speaker: 'pekka', text: "Laptop keeps my hands warm" },
     { speaker: 'rene', text: "Silver lining of open source 😄" },
+  ],
+  // Mikka conversations
+  [
+    { speaker: 'mikka', text: "Board meeting agenda has 12 items today" },
+    { speaker: 'rene', text: "Can we skip the first 11?" },
+    { speaker: 'mikka', text: "No. Item 1: why don't we have more sponsors" },
+    { speaker: 'rene', text: "...this is going to be a long meeting" },
+  ],
+  [
+    { speaker: 'mikka', text: "We need more paying members" },
+    { speaker: 'pekka', text: "Have you tried making RF worse so people pay for support?" },
+    { speaker: 'mikka', text: "That is... not the strategy" },
+    { speaker: 'pekka', text: "Just brainstorming 🙃" },
+  ],
+  [
+    { speaker: 'mikka', text: "I sent the board 5 emails this week" },
+    { speaker: 'rene', text: "I saw them. All of them. At 6 AM" },
+    { speaker: 'mikka', text: "Early bird gets the sponsors" },
+    { speaker: 'rene', text: "Early bird gets the coffee first ☕" },
+  ],
+  [
+    { speaker: 'pekka', text: "Mikka, any new sponsors?" },
+    { speaker: 'mikka', text: "I'm working on three leads right now" },
+    { speaker: 'pekka', text: "You said that last month too" },
+    { speaker: 'mikka', text: "These are THREE DIFFERENT leads!" },
+  ],
+  [
+    { speaker: 'mikka', text: "The Foundation needs a bigger budget" },
+    { speaker: 'pekka', text: "For what?" },
+    { speaker: 'mikka', text: "To pay me to find a bigger budget" },
+    { speaker: 'pekka', text: "...the logic checks out somehow" },
+  ],
+  [
+    { speaker: 'mikka', text: "Who's done their action items from last meeting?" },
+    { speaker: 'rene', text: "Define 'done'" },
+    { speaker: 'pekka', text: "Define 'action items'" },
+    { speaker: 'mikka', text: "I'll take that as a no 😅" },
+  ],
+  [
+    { speaker: 'mikka', text: "RoboCon attendance is looking great this year" },
+    { speaker: 'rene', text: "People love Helsinki in February" },
+    { speaker: 'mikka', text: "They love RF. Helsinki is a bonus" },
+    { speaker: 'pekka', text: "The sauna is the real reason" },
+  ],
+  [
+    { speaker: 'rene', text: "Mikka, when's the next board meeting?" },
+    { speaker: 'mikka', text: "You just missed it" },
+    { speaker: 'rene', text: "What? When was it?" },
+    { speaker: 'mikka', text: "Just kidding. It's Thursday. Please show up 😄" },
+  ],
+  [
+    { speaker: 'mikka', text: "I pitched RF to a Fortune 500 company today" },
+    { speaker: 'pekka', text: "And?" },
+    { speaker: 'mikka', text: "They said 'we already use it'" },
+    { speaker: 'pekka', text: "That's... good and bad at the same time" },
+  ],
+  [
+    { speaker: 'mikka', text: "Open source is free but someone has to pay the bills" },
+    { speaker: 'rene', text: "That's basically my LinkedIn headline" },
+    { speaker: 'mikka', text: "Mine too. We should coordinate" },
+    { speaker: 'rene', text: "Add it to the next board meeting agenda" },
   ],
 ];
 
@@ -360,6 +421,53 @@ function reneSvg(): string {
   </svg>`;
 }
 
+// Mikka Solmela — light brown hair styled up, glasses, short beard, pink/red hoodie over black tee
+function mikkaSvg(): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 40" width="${GNOME_W}" height="${GNOME_H}">
+    <!-- Hair (styled up) -->
+    <ellipse cx="12" cy="9" rx="7" ry="7" fill="#b8935a"/>
+    <ellipse cx="12" cy="5.5" rx="5" ry="3.5" fill="#c4a060"/>
+    <rect x="5" y="10" width="14" height="3" fill="#b8935a" rx="1"/>
+    <!-- Face -->
+    <ellipse cx="12" cy="14" rx="6" ry="6.5" fill="#f0cda8"/>
+    <!-- Glasses -->
+    <rect x="7" y="11.5" rx="1.5" ry="1.5" width="4.5" height="3.5" fill="none" stroke="#c0a888" stroke-width="0.6"/>
+    <rect x="12.5" y="11.5" rx="1.5" ry="1.5" width="4.5" height="3.5" fill="none" stroke="#c0a888" stroke-width="0.6"/>
+    <line x1="11.5" y1="13" x2="12.5" y2="13" stroke="#c0a888" stroke-width="0.5"/>
+    <!-- Eyes (behind glasses) -->
+    <ellipse cx="9.3" cy="13.2" rx="0.9" ry="1" fill="#3a4a3a"/>
+    <ellipse cx="14.7" cy="13.2" rx="0.9" ry="1" fill="#3a4a3a"/>
+    <circle cx="9.7" cy="12.8" r="0.35" fill="#fff"/>
+    <circle cx="15.1" cy="12.8" r="0.35" fill="#fff"/>
+    <!-- Nose -->
+    <ellipse cx="12" cy="15.5" rx="1.1" ry="0.7" fill="#e8b88a"/>
+    <!-- Smile -->
+    <path d="M9.5 17 Q12 19.5 14.5 17" stroke="#c4956a" stroke-width="0.6" fill="none"/>
+    <!-- Beard (short) -->
+    <ellipse cx="12" cy="18" rx="4.5" ry="2.5" fill="#9a7a50"/>
+    <ellipse cx="12" cy="17.5" rx="3.5" ry="1.8" fill="#aa8a5a"/>
+    <!-- Hoodie (pink/red) -->
+    <rect x="4" y="21" width="16" height="10" rx="3" fill="#e8365d"/>
+    <!-- Hood outline -->
+    <path d="M5 21 Q4 19 6 18" stroke="#d02a50" stroke-width="0.8" fill="none"/>
+    <path d="M19 21 Q20 19 18 18" stroke="#d02a50" stroke-width="0.8" fill="none"/>
+    <!-- Black tee underneath -->
+    <rect x="8" y="21" width="8" height="4" rx="1" fill="#1a1a1a"/>
+    <!-- Arms -->
+    <rect x="1" y="22" width="4" height="7" rx="2" fill="#e8365d"/>
+    <rect x="19" y="22" width="4" height="7" rx="2" fill="#e8365d"/>
+    <!-- Hands -->
+    <circle cx="3" cy="30" r="1.8" fill="#f0cda8"/>
+    <circle cx="21" cy="30" r="1.8" fill="#f0cda8"/>
+    <!-- Pants -->
+    <rect x="6" y="30" width="5" height="6" rx="2" fill="#2c2c3a"/>
+    <rect x="13" y="30" width="5" height="6" rx="2" fill="#2c2c3a"/>
+    <!-- Shoes -->
+    <ellipse cx="8.5" cy="37" rx="3" ry="1.8" fill="#3a3a3a"/>
+    <ellipse cx="15.5" cy="37" rx="3" ry="1.8" fill="#3a3a3a"/>
+  </svg>`;
+}
+
 interface FlyingStar {
   id: number;
   x: number;
@@ -393,7 +501,7 @@ interface Gnome {
 }
 
 interface Person {
-  name: 'pekka' | 'rene';
+  name: 'pekka' | 'rene' | 'mikka';
   x: number;
   direction: number;
   el: HTMLDivElement;
@@ -657,7 +765,7 @@ export function ShootingStars() {
     }
 
     // --- Person setup (Pekka & René) ---
-    function createPerson(name: 'pekka' | 'rene', svgFn: () => string, startX: number, direction: number): Person {
+    function createPerson(name: Person['name'], svgFn: () => string, startX: number, direction: number): Person {
       const el = document.createElement("div");
       el.className = "gnome"; // reuse gnome positioning
       el.innerHTML = svgFn();
@@ -669,7 +777,7 @@ export function ShootingStars() {
       if (person.bubbleEl) person.bubbleEl.remove();
       const bubble = document.createElement("div");
       bubble.className = `gnome-bubble person-bubble-${person.name}`;
-      const displayName = person.name === 'pekka' ? 'Pekka' : 'René';
+      const displayName = { pekka: 'Pekka', rene: 'René', mikka: 'Mikka' }[person.name];
       bubble.innerHTML = `<span class="person-bubble-name">${displayName}:</span> ${text}`;
       container!.appendChild(bubble);
       person.bubbleEl = bubble;
@@ -688,9 +796,10 @@ export function ShootingStars() {
       createGnome("#4a8c3f", w * 0.75, -1),
     ];
 
-    // Two persons: Pekka starts left, René starts right
+    // Three persons: Pekka left, Mikka center, René right
     const persons: Person[] = [
       createPerson('pekka', pekkaSvg, w * 0.10, 1),
+      createPerson('mikka', mikkaSvg, w * 0.50, -1),
       createPerson('rene', reneSvg, w * 0.90, -1),
     ];
 

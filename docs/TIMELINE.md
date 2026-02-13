@@ -109,6 +109,11 @@
 - Distinct bubble colors: warm golden-brown (Pekka), cool blue-purple (René)
 - No shooting, no pancakes, no super saiyan — just walking and talking
 
+**~10:30** — "Add Mikka Solmela as a third walking character"
+- RF Executive Director: light brown hair styled up, glasses, short beard, pink/red hoodie
+- 10 new conversations about sponsor hunting, board meetings, action items, and open source budgets
+- Pink bubble color matching the hoodie
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**
