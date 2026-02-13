@@ -32,6 +32,13 @@ const BUBBLE_DURATION_MS = 5000;
 const SONG_INTERVAL_MS = 120000; // 2 minutes between songs
 const SONG_LINE_MS = 2500; // each line shown for 2.5s
 
+// Person config (Pekka & René)
+const PERSON_SPEED = 0.3;
+const PERSON_MARGIN = 50;
+const CONVO_INTERVAL_MS = 60000; // 1 min between conversations
+const CONVO_LINE_MS = 4000; // each line shown 4s
+const CONVO_BUBBLE_DURATION_MS = 3500;
+
 interface SongLine {
   gnome: number;
   text: string;
@@ -140,6 +147,103 @@ const GNOME_MESSAGES = [
   "Tervetuloa! 🎊",
 ];
 
+interface ConvoLine {
+  speaker: 'pekka' | 'rene';
+  text: string;
+}
+
+const CONVERSATIONS: ConvoLine[][] = [
+  [
+    { speaker: 'pekka', text: "RF 7 is looking really good" },
+    { speaker: 'rene', text: "The VAR syntax was worth the debates" },
+    { speaker: 'pekka', text: "Only took us 3 years of GitHub issues" },
+    { speaker: 'rene', text: "Open source moves fast... eventually" },
+  ],
+  [
+    { speaker: 'rene', text: "How many keywords is too many keywords?" },
+    { speaker: 'pekka', text: "There is no upper limit" },
+    { speaker: 'rene', text: "That explains the 800-keyword library I reviewed" },
+    { speaker: 'pekka', text: "...was it well-documented at least?" },
+  ],
+  [
+    { speaker: 'pekka', text: "TRY/EXCEPT was a good addition" },
+    { speaker: 'rene', text: "People kept asking for it for years" },
+    { speaker: 'pekka', text: "Now they ask why it's not like Python" },
+    { speaker: 'rene', text: "You can never win 😄" },
+  ],
+  [
+    { speaker: 'rene', text: "Browser Library or SeleniumLibrary?" },
+    { speaker: 'pekka', text: "Why not both?" },
+    { speaker: 'rene', text: "That's what everyone's doing actually" },
+    { speaker: 'pekka', text: "The RF way: support everything" },
+  ],
+  [
+    { speaker: 'pekka', text: "Someone opened an issue in Finnish" },
+    { speaker: 'rene', text: "Could you understand it?" },
+    { speaker: 'pekka', text: "Yes. It said 'this doesn't work'" },
+    { speaker: 'rene', text: "Same in every language then" },
+  ],
+  [
+    { speaker: 'rene', text: "The Foundation board meeting is next week" },
+    { speaker: 'pekka', text: "Any exciting agenda items?" },
+    { speaker: 'rene', text: "Whether to use RF to test RF" },
+    { speaker: 'pekka', text: "...we should have done that years ago" },
+  ],
+  [
+    { speaker: 'pekka', text: "I coded all night, it's 4 AM in Helsinki" },
+    { speaker: 'rene', text: "The sun is already up there, right?" },
+    { speaker: 'pekka', text: "In June yes. In February? Pure darkness" },
+    { speaker: 'rene', text: "Perfect conditions for coding" },
+  ],
+  [
+    { speaker: 'rene', text: "Should we add YAML support?" },
+    { speaker: 'pekka', text: "...please don't start that again" },
+    { speaker: 'rene', text: "I'm just asking!" },
+    { speaker: 'pekka', text: "The answer is still no 🙃" },
+  ],
+  [
+    { speaker: 'pekka', text: "Have you seen the log.html lately?" },
+    { speaker: 'rene', text: "It's beautiful. Who needs dashboards?" },
+    { speaker: 'pekka', text: "Some people print it and frame it" },
+    { speaker: 'rene', text: "As one should" },
+  ],
+  [
+    { speaker: 'rene', text: "Coffee break?" },
+    { speaker: 'pekka', text: "In Finland, it's always coffee time" },
+    { speaker: 'rene', text: "Germans also take coffee seriously" },
+    { speaker: 'pekka', text: "But we drink more per capita 🇫🇮" },
+  ],
+  [
+    { speaker: 'pekka', text: "Someone named their keyword 'Do The Thing'" },
+    { speaker: 'rene', text: "Descriptive naming at its finest" },
+    { speaker: 'pekka', text: "At least it wasn't 'Test 1'" },
+    { speaker: 'rene', text: "...I've seen 'Test 1' through 'Test 847'" },
+  ],
+  [
+    { speaker: 'rene', text: "How's the sauna after RoboCon?" },
+    { speaker: 'pekka', text: "Essential. It's part of the conference" },
+    { speaker: 'rene', text: "In Germany we'd have a beer garden" },
+    { speaker: 'pekka', text: "We have beer in the sauna too" },
+  ],
+  [
+    { speaker: 'pekka', text: "RF is used in 60+ countries now" },
+    { speaker: 'rene', text: "And how many languages?" },
+    { speaker: 'pekka', text: "Keywords work in any language, that's the beauty" },
+    { speaker: 'rene', text: "Universal test automation 🌍" },
+  ],
+  [
+    { speaker: 'rene', text: "What's your favorite RF feature?" },
+    { speaker: 'pekka', text: "Simplicity. Plain text is powerful" },
+    { speaker: 'rene', text: "Mine is the community" },
+    { speaker: 'pekka', text: "That's not a feature... but I agree ❤️" },
+  ],
+  [
+    { speaker: 'pekka', text: "Winter coding in Helsinki: -20°C outside" },
+    { speaker: 'rene', text: "That sounds terrible" },
+    { speaker: 'pekka', text: "Laptop keeps my hands warm" },
+    { speaker: 'rene', text: "Silver lining of open source 😄" },
+  ],
+];
 
 // RF logo SVG using currentColor for fill
 const RF_PATH = "m 0,0 c 0,7.6 6.179,13.779 13.77,13.779 7.6,0 13.779,-6.179 13.779,-13.779 0,-2.769 -2.238,-5.007 -4.998,-5.007 -2.761,0 -4.999,2.238 -4.999,5.007 0,2.078 -1.695,3.765 -3.782,3.765 C 11.693,3.765 9.997,2.078 9.997,0 9.997,-2.769 7.76,-5.007 4.999,-5.007 2.238,-5.007 0,-2.769 0,0 m 57.05,-23.153 c 0,-2.771 -2.237,-5.007 -4.998,-5.007 l -46.378,0 c -2.761,0 -4.999,2.236 -4.999,5.007 0,2.769 2.238,5.007 4.999,5.007 l 46.378,0 c 2.761,0 4.998,-2.238 4.998,-5.007 M 35.379,-2.805 c -1.545,2.291 -0.941,5.398 1.35,6.943 l 11.594,7.83 c 2.273,1.58 5.398,0.941 6.943,-1.332 1.545,-2.29 0.941,-5.398 -1.35,-6.943 l -11.594,-7.83 c -0.852,-0.586 -1.829,-0.87 -2.788,-0.87 -1.607,0 -3.187,0.781 -4.155,2.202 m 31.748,-30.786 c 0,-0.945 -0.376,-1.852 -1.045,-2.522 l -8.617,-8.617 c -0.669,-0.668 -1.576,-1.045 -2.523,-1.045 l -52.833,0 c -0.947,0 -1.854,0.377 -2.523,1.045 l -8.617,8.617 c -0.669,0.67 -1.045,1.577 -1.045,2.522 l 0,52.799 c 0,0.947 0.376,1.854 1.045,2.522 l 8.617,8.619 c 0.669,0.668 1.576,1.044 2.523,1.044 l 52.833,0 c 0.947,0 1.854,-0.376 2.523,-1.044 l 8.617,-8.619 c 0.669,-0.668 1.045,-1.575 1.045,-2.522 l 0,-52.799 z m 7.334,61.086 -11.25,11.25 c -1.705,1.705 -4.018,2.663 -6.428,2.663 l -56.523,0 c -2.412,0 -4.725,-0.959 -6.43,-2.665 L -17.412,27.494 c -1.704,-1.705 -2.661,-4.016 -2.661,-6.427 l 0,-56.515 c 0,-2.411 0.958,-4.725 2.663,-6.428 l 11.25,-11.25 c 1.705,-1.705 4.017,-2.662 6.428,-2.662 l 56.515,0 c 2.41,0 4.723,0.957 6.428,2.662 l 11.25,11.25 c 1.705,1.703 2.663,4.017 2.663,6.428 l 0,56.514 c 0,2.412 -0.958,4.724 -2.663,6.429";
@@ -184,6 +288,78 @@ function gnomeSvg(hatColor: string): string {
   </svg>`;
 }
 
+// Pekka Klärck — light brown hair, clean-shaven, olive/brown shirt
+function pekkaSvg(): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 40" width="${GNOME_W}" height="${GNOME_H}">
+    <!-- Hair -->
+    <ellipse cx="12" cy="10" rx="7" ry="7.5" fill="#a67b4f"/>
+    <rect x="5" y="10" width="14" height="4" fill="#a67b4f" rx="1"/>
+    <!-- Face -->
+    <ellipse cx="12" cy="14" rx="6" ry="6.5" fill="#f0cda8"/>
+    <!-- Eyes -->
+    <ellipse cx="9.5" cy="13" rx="1" ry="1.2" fill="#3a5a3a"/>
+    <ellipse cx="14.5" cy="13" rx="1" ry="1.2" fill="#3a5a3a"/>
+    <circle cx="10" cy="12.6" r="0.4" fill="#fff"/>
+    <circle cx="15" cy="12.6" r="0.4" fill="#fff"/>
+    <!-- Nose & mouth -->
+    <ellipse cx="12" cy="15.5" rx="1.2" ry="0.8" fill="#e8b88a"/>
+    <path d="M10 17.5 Q12 19 14 17.5" stroke="#c4956a" stroke-width="0.5" fill="none"/>
+    <!-- Shirt -->
+    <rect x="5" y="21" width="14" height="10" rx="3" fill="#7a6532"/>
+    <!-- Arms -->
+    <rect x="2" y="22" width="4" height="7" rx="2" fill="#7a6532"/>
+    <rect x="18" y="22" width="4" height="7" rx="2" fill="#7a6532"/>
+    <!-- Hands -->
+    <circle cx="4" cy="30" r="1.8" fill="#f0cda8"/>
+    <circle cx="20" cy="30" r="1.8" fill="#f0cda8"/>
+    <!-- Pants -->
+    <rect x="6" y="30" width="5" height="6" rx="2" fill="#2c2c3a"/>
+    <rect x="13" y="30" width="5" height="6" rx="2" fill="#2c2c3a"/>
+    <!-- Shoes -->
+    <ellipse cx="8.5" cy="37" rx="3" ry="1.8" fill="#3a3a3a"/>
+    <ellipse cx="15.5" cy="37" rx="3" ry="1.8" fill="#3a3a3a"/>
+  </svg>`;
+}
+
+// René Rohner — dark hair with bun, dark beard, dark shirt/jacket
+function reneSvg(): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 40" width="${GNOME_W}" height="${GNOME_H}">
+    <!-- Hair -->
+    <ellipse cx="12" cy="10" rx="7" ry="7.5" fill="#2a1f14"/>
+    <rect x="5" y="10" width="14" height="4" fill="#2a1f14" rx="1"/>
+    <!-- Bun -->
+    <circle cx="12" cy="3.5" r="3.5" fill="#2a1f14"/>
+    <!-- Face -->
+    <ellipse cx="12" cy="14" rx="6" ry="6.5" fill="#e8c49a"/>
+    <!-- Eyes -->
+    <ellipse cx="9.5" cy="13" rx="1" ry="1.2" fill="#2a3a4a"/>
+    <ellipse cx="14.5" cy="13" rx="1" ry="1.2" fill="#2a3a4a"/>
+    <circle cx="10" cy="12.6" r="0.4" fill="#fff"/>
+    <circle cx="15" cy="12.6" r="0.4" fill="#fff"/>
+    <!-- Nose -->
+    <ellipse cx="12" cy="15.5" rx="1.2" ry="0.8" fill="#d4a876"/>
+    <!-- Beard -->
+    <ellipse cx="12" cy="18.5" rx="5" ry="3.5" fill="#2a1f14"/>
+    <ellipse cx="12" cy="18" rx="4" ry="2.5" fill="#3a2a1e"/>
+    <!-- Jacket -->
+    <rect x="4" y="21" width="16" height="10" rx="3" fill="#1a1a2e"/>
+    <!-- Shirt collar -->
+    <polygon points="10,21 12,24 14,21" fill="#2a2a3e"/>
+    <!-- Arms -->
+    <rect x="1" y="22" width="4" height="7" rx="2" fill="#1a1a2e"/>
+    <rect x="19" y="22" width="4" height="7" rx="2" fill="#1a1a2e"/>
+    <!-- Hands -->
+    <circle cx="3" cy="30" r="1.8" fill="#e8c49a"/>
+    <circle cx="21" cy="30" r="1.8" fill="#e8c49a"/>
+    <!-- Pants -->
+    <rect x="6" y="30" width="5" height="6" rx="2" fill="#15152a"/>
+    <rect x="13" y="30" width="5" height="6" rx="2" fill="#15152a"/>
+    <!-- Shoes -->
+    <ellipse cx="8.5" cy="37" rx="3" ry="1.8" fill="#1a1a1a"/>
+    <ellipse cx="15.5" cy="37" rx="3" ry="1.8" fill="#1a1a1a"/>
+  </svg>`;
+}
+
 interface FlyingStar {
   id: number;
   x: number;
@@ -214,6 +390,15 @@ interface Gnome {
   superSaiyan: boolean;
   superSaiyanFrame: number;
   shootFrame: number;
+}
+
+interface Person {
+  name: 'pekka' | 'rene';
+  x: number;
+  direction: number;
+  el: HTMLDivElement;
+  frame: number;
+  bubbleEl: HTMLDivElement | null;
 }
 
 interface Projectile {
@@ -471,10 +656,42 @@ export function ShootingStars() {
       }, duration);
     }
 
+    // --- Person setup (Pekka & René) ---
+    function createPerson(name: 'pekka' | 'rene', svgFn: () => string, startX: number, direction: number): Person {
+      const el = document.createElement("div");
+      el.className = "gnome"; // reuse gnome positioning
+      el.innerHTML = svgFn();
+      container!.appendChild(el);
+      return { name, x: startX, direction, el, frame: 0, bubbleEl: null };
+    }
+
+    function showPersonBubble(person: Person, text: string, duration: number = CONVO_BUBBLE_DURATION_MS) {
+      if (person.bubbleEl) person.bubbleEl.remove();
+      const bubble = document.createElement("div");
+      bubble.className = `gnome-bubble person-bubble-${person.name}`;
+      const displayName = person.name === 'pekka' ? 'Pekka' : 'René';
+      bubble.innerHTML = `<span class="person-bubble-name">${displayName}:</span> ${text}`;
+      container!.appendChild(bubble);
+      person.bubbleEl = bubble;
+      setTimeout(() => {
+        bubble.classList.add("gnome-bubble-fading");
+        setTimeout(() => {
+          bubble.remove();
+          if (person.bubbleEl === bubble) person.bubbleEl = null;
+        }, 1000);
+      }, duration);
+    }
+
     // Two gnomes: red hat starts left, green hat starts right
     const gnomes: Gnome[] = [
       createGnome("#cc4444", w * 0.25, 1),
       createGnome("#4a8c3f", w * 0.75, -1),
+    ];
+
+    // Two persons: Pekka starts left, René starts right
+    const persons: Person[] = [
+      createPerson('pekka', pekkaSvg, w * 0.10, 1),
+      createPerson('rene', reneSvg, w * 0.90, -1),
     ];
 
     // --- Bubble timer ---
@@ -541,7 +758,38 @@ export function ShootingStars() {
     // First song after 30-60s
     songTimerId = setTimeout(playSong, (30000 + Math.random() * 30000) / timeBoost);
 
-    // --- Karaoke announcement timer ---
+    // --- Person conversation timer ---
+    const personConvoTimeouts: ReturnType<typeof setTimeout>[] = [];
+    let lastConvoIdx = -1;
+
+    function playConversation() {
+      let idx = Math.floor(Math.random() * CONVERSATIONS.length);
+      if (idx === lastConvoIdx && CONVERSATIONS.length > 1) idx = (idx + 1) % CONVERSATIONS.length;
+      lastConvoIdx = idx;
+      const convo = CONVERSATIONS[idx];
+
+      convo.forEach((line, i) => {
+        const tid = setTimeout(() => {
+          const person = persons.find(p => p.name === line.speaker)!;
+          showPersonBubble(person, line.text);
+        }, (i * CONVO_LINE_MS) / timeBoost);
+        personConvoTimeouts.push(tid);
+      });
+
+      const endTid = setTimeout(() => {
+        scheduleConversation();
+      }, (convo.length * CONVO_LINE_MS + 1000) / timeBoost);
+      personConvoTimeouts.push(endTid);
+    }
+
+    function scheduleConversation() {
+      const tid = setTimeout(playConversation, CONVO_INTERVAL_MS / timeBoost);
+      personConvoTimeouts.push(tid);
+    }
+
+    // First conversation after 15-25s
+    const firstConvoTid = setTimeout(playConversation, (15000 + Math.random() * 10000) / timeBoost);
+    personConvoTimeouts.push(firstConvoTid);
 
     // --- Animation loop ---
     let frameId: number;
@@ -732,6 +980,35 @@ export function ShootingStars() {
         }
       }
 
+      // --- Update persons (Pekka & René) ---
+      for (const person of persons) {
+        person.frame++;
+        const personY = h - GNOME_H / 2;
+
+        // Simple walk
+        person.x += PERSON_SPEED * person.direction;
+
+        // Turn around at edges
+        if (person.x >= w - PERSON_MARGIN) {
+          person.direction = -1;
+        } else if (person.x <= PERSON_MARGIN) {
+          person.direction = 1;
+        }
+
+        // Bobbing animation
+        const bob = Math.sin(person.frame * 0.12) * 1.5;
+        const scaleX = person.direction >= 0 ? 1 : -1;
+        const personVisualY = personY - GNOME_H / 2 + bob;
+
+        person.el.style.transform = `translate(${person.x - GNOME_W / 2}px, ${personVisualY}px) scaleX(${scaleX})`;
+
+        // Position bubble above person
+        if (person.bubbleEl) {
+          person.bubbleEl.style.left = `${person.x}px`;
+          person.bubbleEl.style.top = `${personVisualY - 30}px`;
+        }
+      }
+
       // --- Both gnomes shooting ---
       for (const shooter of gnomes) {
         if (shooter.eating || flyingStars.length === 0) continue;
@@ -906,6 +1183,7 @@ export function ShootingStars() {
       clearTimeout(bubbleTimerId);
       clearTimeout(songTimerId);
       songTimeouts.forEach(clearTimeout);
+      personConvoTimeouts.forEach(clearTimeout);
       window.removeEventListener("resize", handleResize);
       Matter.Engine.clear(engine);
       while (container.firstChild) {

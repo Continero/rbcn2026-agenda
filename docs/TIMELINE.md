@@ -100,9 +100,18 @@
 **~09:00** — "Remove the karaoke announcements, no karaoke today"
 - Removed karaoke mega-announcement system from gnomes
 
+**~10:00** — "Add Pekka Klärck & René Rohner as walking characters"
+- Two new cartoon figures (not gnomes) walking along the bottom
+- Pekka: light brown hair, clean-shaven, brown shirt (RF creator)
+- René: dark hair with bun, beard, dark clothing (RF Foundation Board Chairman)
+- Independent conversation system with RF insider jokes, technical talk, cultural humor
+- ~15 conversation scripts alternating between speakers every ~1 minute
+- Distinct bubble colors: warm golden-brown (Pekka), cool blue-purple (René)
+- No shooting, no pancakes, no super saiyan — just walking and talking
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**
 
 The escalation path:
-> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby
+> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk**

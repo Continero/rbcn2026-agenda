@@ -41,6 +41,12 @@ A real-time conference agenda that knows what's happening now, what's coming up,
 - **Singing duets** — gnomes alternate lines from well-known songs every 2 minutes:
   - Bohemian Rhapsody, Never Gonna Give You Up, We Will Rock You, Don't Stop Believin', Hakuna Matata, YMCA, Baby Shark
 
+### Walking Characters (Pekka & René)
+- **Pekka Klärck** (Robot Framework creator) and **René Rohner** (RF Foundation Board Chairman) walk along the bottom
+- Independent from gnomes — no shooting, no pancakes, no super saiyan
+- **Conversations** — alternating speech bubbles every ~1 minute with RF insider jokes, technical talk, and cultural humor
+- Distinct bubble colors: warm golden-brown (Pekka) and cool blue-purple (René)
+
 ### Special Events
 - **Community Dinner** at Ravintola Laulu with venue details and meetup info
 - **Karaoke Party** at Karaokebar Erottaja — highlighted with golden shimmer effect, always-expanded description
@@ -88,7 +94,7 @@ This entire project was built through conversational "vibe coding" with [Claude 
 
 The escalation went something like this:
 
-> "nice aurora background" &#8594; "shooting stars with RF logos" &#8594; "walking gnomes" &#8594; "make them talk" &#8594; "what if they dance?" &#8594; "give them guns" &#8594; "SUPER SAIYAN MODE" &#8594; "they should sing Baby Shark"
+> "nice aurora background" &#8594; "shooting stars with RF logos" &#8594; "walking gnomes" &#8594; "make them talk" &#8594; "what if they dance?" &#8594; "give them guns" &#8594; "SUPER SAIYAN MODE" &#8594; "they should sing Baby Shark" &#8594; "add Pekka & René as walking characters"
 
 Zero tests. Zero regrets.
 

@@ -287,6 +287,33 @@
   animation: laser-flash 0.3s ease-out forwards;
 }
 
+/* --- Person bubbles (Pekka & René) --- */
+
+.person-bubble-name {
+  font-weight: 700;
+  margin-right: 3px;
+}
+
+.person-bubble-pekka {
+  background: rgba(122, 101, 50, 0.2);
+  border: 1px solid rgba(160, 130, 60, 0.4);
+  color: rgba(240, 220, 170, 0.9);
+}
+
+.person-bubble-pekka::after {
+  border-top-color: rgba(160, 130, 60, 0.4);
+}
+
+.person-bubble-rene {
+  background: rgba(60, 60, 120, 0.2);
+  border: 1px solid rgba(100, 100, 180, 0.4);
+  color: rgba(200, 210, 240, 0.9);
+}
+
+.person-bubble-rene::after {
+  border-top-color: rgba(100, 100, 180, 0.4);
+}
+
 /* --- Edge impact sparks --- */
 
 @keyframes spark-fly {
