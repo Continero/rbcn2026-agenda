@@ -124,9 +124,16 @@
 - Color-coded bubble styles: red-tinted for Kelby, green-tinted for Elout
 - Names appear in random messages, song duets, and pancake scenes
 
+**~13:30** — "Make the after-party flashy with disco & fireworks"
+- Progressive disco effects that build up over the last 2 hours before the party
+- Subtle color-cycling border → glowing pulses → full rainbow disco + fireworks
+- DiscoEffect component wraps both UpNext and CurrentTalk (NOW) cards
+- CSS-only firework particle bursts at high intensity, increasing frequency
+- Intensity ramps 0→0.8 during approach, jumps to 1.0 when party is live
+
 ---
 
 **Total: ~2 evenings + 2 conference days of vibe coding**
 
 The escalation path:
-> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk** -> **named gnomes (Kelby & Elout)**
+> schedule display -> aurora -> QR code -> shooting stars -> walking gnomes -> speech bubbles -> dancing -> **guns** -> **SUPER SAIYAN** -> singing Baby Shark -> wall bouncing -> karaoke party -> pancakes from Kelby -> **Pekka & René walk & talk** -> **named gnomes (Kelby & Elout)** -> **DISCO PARTY MODE**

@@ -167,6 +167,36 @@ export function formatCurrentDate(date: Date): string {
   return `${weekday}, ${day} ${month}`;
 }
 
+/**
+ * Returns 0–1 intensity for disco effects based on proximity to the after-party.
+ * 0 = far away (>2h), 1 = it's party time (after-party is current item).
+ * Ramps up over the last 2 hours before the party starts.
+ */
+export function getPartyIntensity(schedule: ScheduleItem[], now: Date): number {
+  const partyItem = schedule.find((item) =>
+    item.title.toLowerCase().includes("after-party")
+  );
+  if (!partyItem) return 0;
+
+  const partyStart = new Date(partyItem.start).getTime();
+  const partyEnd = new Date(partyItem.end).getTime();
+  const nowMs = now.getTime();
+
+  // Already at the party
+  if (nowMs >= partyStart && nowMs < partyEnd) return 1;
+
+  // Party is over
+  if (nowMs >= partyEnd) return 0;
+
+  // Ramp up over 2 hours before party
+  const rampMs = 2 * 60 * 60 * 1000; // 2 hours
+  const timeUntil = partyStart - nowMs;
+  if (timeUntil > rampMs) return 0;
+
+  // 0 at 2h out, ~0.8 right before it starts (save 1.0 for when it's live)
+  return (1 - timeUntil / rampMs) * 0.8;
+}
+
 export function getTimeUntil(target: Date, now: Date): string {
   const diff = target.getTime() - now.getTime();
   if (diff <= 0) return "now";

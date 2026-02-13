@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { schedule } from "@/data/schedule";
 import { useCurrentTime } from "@/hooks/useCurrentTime";
-import { getScheduleState, getTimeUntil } from "@/lib/schedule-utils";
+import { getScheduleState, getTimeUntil, getPartyIntensity } from "@/lib/schedule-utils";
 import { Header } from "@/components/Header";
 import { CurrentTalk } from "@/components/CurrentTalk";
 import { BreakCard } from "@/components/BreakCard";
@@ -16,6 +16,7 @@ import { QRCodeSVG } from "qrcode.react";
 export default function Home() {
   const now = useCurrentTime(1000);
   const state = getScheduleState(schedule, now);
+  const partyIntensity = getPartyIntensity(schedule, now);
 
   // Pulse aurora when current item changes
   const [auroraPulse, setAuroraPulse] = useState(false);
@@ -49,7 +50,7 @@ export default function Home() {
         ) : state.isAfterEnd ? (
           <AfterEnd dayLabel={state.dayLabel} />
         ) : (
-          <LiveView state={state} now={now} />
+          <LiveView state={state} now={now} partyIntensity={partyIntensity} />
         )}
       </main>
       </div>
@@ -76,9 +77,11 @@ export default function Home() {
 function LiveView({
   state,
   now,
+  partyIntensity,
 }: {
   state: ReturnType<typeof getScheduleState>;
   now: Date;
+  partyIntensity: number;
 }) {
   const nextTalk = state.upNext.find((item) => !item.isBreak) || null;
   const nowRef = useRef<HTMLDivElement>(null);
@@ -113,6 +116,7 @@ function LiveView({
             <CurrentTalk
               item={state.currentItem}
               progress={state.progress}
+              partyIntensity={partyIntensity}
             />
           )
         )}
@@ -123,7 +127,7 @@ function LiveView({
 
       {/* Up Next – fills remaining space, scrollable on desktop */}
       <div className="flex-1 lg:min-h-0 lg:overflow-hidden">
-        <UpNext items={state.upNext} />
+        <UpNext items={state.upNext} partyIntensity={partyIntensity} />
       </div>
     </>
   );

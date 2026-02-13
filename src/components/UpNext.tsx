@@ -4,12 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import { ScheduleItem } from "@/data/schedule";
 import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
+import { DiscoEffect } from "./DiscoEffect";
 
 interface UpNextProps {
   items: ScheduleItem[];
+  partyIntensity?: number;
 }
 
-export function UpNext({ items }: UpNextProps) {
+export function UpNext({ items, partyIntensity = 0 }: UpNextProps) {
   const firstTalkId = items.find((item) => !item.isBreak && item.abstract)?.id ?? null;
   const isSpecialEvent = (item: ScheduleItem) => {
     const t = item.title.toLowerCase();
@@ -37,15 +39,22 @@ export function UpNext({ items }: UpNextProps) {
         Up Next
       </h3>
       <div className="flex flex-col flex-1 lg:overflow-hidden overflow-y-auto">
-        {items.map((item, idx) => (
-          <UpNextItem
-            key={item.id}
-            item={item}
-            isFirst={idx === 0}
-            isExpanded={expandedId === item.id || item.id === karaokeId}
-            onToggle={() => setExpandedId(expandedId === item.id ? null : item.id)}
-          />
-        ))}
+        {items.map((item, idx) => {
+          const isParty = item.title.toLowerCase().includes("after-party");
+          const el = (
+            <UpNextItem
+              key={item.id}
+              item={item}
+              isFirst={idx === 0}
+              isExpanded={expandedId === item.id || item.id === karaokeId}
+              onToggle={() => setExpandedId(expandedId === item.id ? null : item.id)}
+            />
+          );
+          if (isParty && partyIntensity > 0) {
+            return <DiscoEffect key={item.id} intensity={partyIntensity}>{el}</DiscoEffect>;
+          }
+          return el;
+        })}
       </div>
     </div>
   );

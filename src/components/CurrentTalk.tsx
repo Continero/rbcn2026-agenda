@@ -5,18 +5,21 @@ import { ScheduleItem } from "@/data/schedule";
 import { speakers } from "@/data/speakers";
 import { formatTime } from "@/lib/schedule-utils";
 import { ProgressBar } from "./ProgressBar";
+import { DiscoEffect } from "./DiscoEffect";
 
 interface CurrentTalkProps {
   item: ScheduleItem;
   progress: number;
+  partyIntensity?: number;
 }
 
-export function CurrentTalk({ item, progress }: CurrentTalkProps) {
+export function CurrentTalk({ item, progress, partyIntensity = 0 }: CurrentTalkProps) {
+  const isAfterParty = item.title.toLowerCase().includes("after-party");
   const itemSpeakers = item.speakerCodes
     .map((code) => speakers[code])
     .filter(Boolean);
 
-  return (
+  const content = (
     <div className="flex flex-col gap-3 lg:gap-5">
       <div className="flex items-center gap-2 sm:gap-4">
         <span className="flex items-center gap-2 sm:gap-3 text-teal font-semibold text-base sm:text-xl lg:text-2xl uppercase tracking-wider">
@@ -76,6 +79,12 @@ export function CurrentTalk({ item, progress }: CurrentTalkProps) {
       </div>
     </div>
   );
+
+  if (isAfterParty && partyIntensity > 0) {
+    return <DiscoEffect intensity={partyIntensity}>{content}</DiscoEffect>;
+  }
+
+  return content;
 }
 
 function cleanAbstract(text: string): string {
