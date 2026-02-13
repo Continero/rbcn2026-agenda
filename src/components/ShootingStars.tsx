@@ -1111,9 +1111,11 @@ export function ShootingStars() {
 
         person.el.style.transform = `translate(${person.x - GNOME_W / 2}px, ${personVisualY}px) scaleX(${scaleX})`;
 
-        // Position bubble above person
+        // Position bubble above person, clamped to screen
         if (person.bubbleEl) {
-          person.bubbleEl.style.left = `${person.x}px`;
+          const bw = person.bubbleEl.offsetWidth;
+          const clampedX = Math.max(bw / 2 + 4, Math.min(person.x, w - bw / 2 - 4));
+          person.bubbleEl.style.left = `${clampedX}px`;
           person.bubbleEl.style.top = `${personVisualY - 30}px`;
         }
       }
