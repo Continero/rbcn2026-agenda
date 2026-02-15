@@ -1,14 +1,31 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { formatCurrentTime, formatCurrentDate } from "@/lib/schedule-utils";
 
 interface HeaderProps {
   now: Date;
   dayLabel: string;
   partyIntensity?: number;
+  isAfterEnd?: boolean;
 }
 
-export function Header({ now, dayLabel, partyIntensity = 0 }: HeaderProps) {
+const TIME_MACHINE_STOPS = [
+  { label: "Day 1 Opening", time: "2026-02-12T07:00:00Z" },
+  { label: "Day 2 Keynote", time: "2026-02-13T07:00:00Z" },
+  { label: "Party Mode", time: "2026-02-13T14:50:00Z" },
+];
+
+export function Header({ now, dayLabel, partyIntensity = 0, isAfterEnd = false }: HeaderProps) {
+  const [isTimeTraveling, setIsTimeTraveling] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setIsTimeTraveling(params.has("time"));
+  }, []);
+
+  const showTimeMachine = (isAfterEnd && dayLabel === "Day 2") || isTimeTraveling;
+
   return (
     <header className="flex flex-col gap-3 lg:gap-5 px-4 sm:px-6 lg:px-0 pt-4 pb-3 lg:pt-10 lg:pb-8 border-b border-cyan-10 shrink-0">
       {/* Top row: logo + title */}
@@ -22,18 +39,61 @@ export function Header({ now, dayLabel, partyIntensity = 0 }: HeaderProps) {
           </h1>
         </div>
       </div>
-      {/* Bottom row: day tabs centered with date + time */}
+      {/* Bottom row: day tabs or time machine */}
       <div className="flex items-center justify-center gap-3 lg:gap-5">
         <span className="text-cyan-60 text-sm sm:text-lg lg:text-2xl">{formatCurrentDate(now)}</span>
         <span className="text-2xl sm:text-3xl lg:text-5xl font-bold text-teal tabular-nums tracking-wider">
           {formatCurrentTime(now)}
         </span>
         <div className="flex gap-2 sm:gap-3 ml-3 lg:ml-5">
-          <DayTab label="Day 1" active={dayLabel === "Day 1"} />
-          <DayTab label="Day 2" active={dayLabel === "Day 2"} />
+          {showTimeMachine ? (
+            <>
+              <span className="text-base sm:text-lg lg:text-2xl self-center mr-1">🕰️</span>
+              {TIME_MACHINE_STOPS.map((stop) => (
+                <TimeMachineTab key={stop.time} label={stop.label} time={stop.time} />
+              ))}
+              {isTimeTraveling && (
+                <TimeMachineTab label="Back to Now" time="" />
+              )}
+            </>
+          ) : (
+            <>
+              <DayTab label="Day 1" active={dayLabel === "Day 1"} />
+              <DayTab label="Day 2" active={dayLabel === "Day 2"} />
+            </>
+          )}
         </div>
       </div>
     </header>
+  );
+}
+
+function TimeMachineTab({ label, time }: { label: string; time: string }) {
+  const isParty = label === "Party Mode";
+  const isBackToNow = !time;
+  return (
+    <button
+      onClick={() => {
+        const url = new URL(window.location.href);
+        if (isBackToNow) {
+          url.searchParams.delete("time");
+          url.searchParams.delete("speed");
+        } else {
+          url.searchParams.set("time", time);
+        }
+        window.location.href = url.toString();
+      }}
+      className={`py-1.5 sm:py-2 lg:py-4 text-xs sm:text-base lg:text-xl font-bold rounded-full transition-colors cursor-pointer ${
+        isParty
+          ? "bg-teal text-navy hover:bg-teal-dim"
+          : isBackToNow
+          ? "bg-gradient-3/20 text-gradient-3 hover:bg-gradient-3/40"
+          : "bg-cyan-10 text-cyan-60 hover:bg-cyan-30 hover:text-cyan"
+      }`}
+      style={{ paddingLeft: "15px", paddingRight: "15px" }}
+    >
+      {label}
+    </button>
   );
 }
 

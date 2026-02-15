@@ -11,12 +11,27 @@ import { UpNext } from "@/components/UpNext";
 import { PastTalks } from "@/components/PastTalks";
 import { AuroraBackground } from "@/components/AuroraBackground";
 import { ShootingStars } from "@/components/ShootingStars";
+import { SpeakerParade } from "@/components/SpeakerParade";
+import { FarewellPlanes } from "@/components/FarewellPlanes";
 import { QRCodeSVG } from "qrcode.react";
 
 export default function Home() {
   const now = useCurrentTime(1000);
   const state = getScheduleState(schedule, now);
   const partyIntensity = getPartyIntensity(schedule, now);
+
+  // Restore cursor when interactive (post-conference or time traveling)
+  useEffect(() => {
+    const hasTimeParam = new URLSearchParams(window.location.search).has("time");
+    if (state.isAfterEnd || hasTimeParam) {
+      document.documentElement.style.cursor = "auto";
+      document.body.style.cursor = "auto";
+      return () => {
+        document.documentElement.style.cursor = "";
+        document.body.style.cursor = "";
+      };
+    }
+  }, [state.isAfterEnd]);
 
   // Pulse aurora when current item changes
   const [auroraPulse, setAuroraPulse] = useState(false);
@@ -35,9 +50,9 @@ export default function Home() {
   return (
     <div className="w-screen min-h-screen lg:h-screen bg-navy lg:overflow-hidden flex justify-center">
       <AuroraBackground pulse={auroraPulse} />
-      <ShootingStars partyIntensity={partyIntensity} />
+      {!state.isAfterEnd && <ShootingStars partyIntensity={partyIntensity} />}
       <div className="w-full lg:w-[75%] h-full flex flex-col lg:overflow-hidden relative z-10">
-      <Header now={now} dayLabel={state.dayLabel} partyIntensity={partyIntensity} />
+      <Header now={now} dayLabel={state.dayLabel} partyIntensity={partyIntensity} isAfterEnd={state.isAfterEnd} />
 
       <main className="flex-1 flex flex-col lg:overflow-hidden lg:min-h-0 px-4 py-4 gap-5 sm:px-6 sm:py-6 sm:gap-6 lg:px-20 lg:py-10 lg:gap-10">
         {state.isBeforeStart ? (
@@ -166,23 +181,66 @@ function BeforeStart({
 }
 
 function AfterEnd({ dayLabel }: { dayLabel: string }) {
+  if (dayLabel === "Day 1") {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center gap-4 lg:gap-6 px-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan text-center" style={{ fontFamily: "var(--font-heading)" }}>
+          That&apos;s a wrap for Day 1!
+        </h2>
+        <p className="text-lg sm:text-xl lg:text-2xl text-teal">See you tomorrow for Day 2</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-4 lg:gap-6 px-4">
-      {dayLabel === "Day 1" ? (
-        <>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan text-center" style={{ fontFamily: "var(--font-heading)" }}>
-            That&apos;s a wrap for Day 1!
-          </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-teal">See you tomorrow for Day 2</p>
-        </>
-      ) : (
-        <>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan text-center" style={{ fontFamily: "var(--font-heading)" }}>
-            Thank you for attending RoboCon 2026!
-          </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-teal">See you next year</p>
-        </>
-      )}
+    <div className="flex-1 flex flex-col items-center justify-center gap-6 lg:gap-8 px-4">
+      <SpeakerParade />
+      <FarewellPlanes />
+      {/* Avatar + wave */}
+      <div className="relative farewell-float">
+        {/* Pulsing glow ring */}
+        <div className="absolute inset-[-8px] rounded-full farewell-glow-ring" />
+
+        {/* Animated pixel art avatar */}
+        <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden">
+          <video
+            src="/david-fogl-pixel.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Waving hand */}
+        <span className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 text-4xl sm:text-5xl lg:text-6xl farewell-wave">
+          👋
+        </span>
+      </div>
+
+      {/* Farewell message */}
+      <div className="text-center max-w-xl lg:max-w-2xl space-y-3 lg:space-y-4">
+        <h2
+          className="text-xl sm:text-2xl lg:text-3xl font-bold text-cyan leading-snug"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          The robots are resting, the gnomes have gone home,
+          <br />
+          but the vibes live on forever.
+        </h2>
+        <p className="text-lg sm:text-xl lg:text-2xl text-teal">
+          Safe travels, everyone — hope to see you all again soon!
+        </p>
+      </div>
+
+      {/* Name + title */}
+      <div className="text-center">
+        <p className="text-base sm:text-lg lg:text-xl font-bold text-cyan">David Fogl</p>
+        <p className="text-sm sm:text-base lg:text-lg text-cyan-60">
+          RF Foundation Board Member &middot; Vibe Coder
+        </p>
+      </div>
     </div>
   );
 }

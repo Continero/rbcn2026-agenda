@@ -176,3 +176,46 @@ html, body {
   animation: glitch-skew 3s ease-in-out infinite, glitch-color 2s step-end infinite;
   position: relative;
 }
+
+/* --- Farewell screen effects --- */
+
+@keyframes farewell-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes farewell-wave-hand {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes farewell-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.03); }
+}
+
+.farewell-float {
+  animation: farewell-float 4s ease-in-out infinite;
+}
+
+.farewell-wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: farewell-wave-hand 2.5s ease-in-out infinite;
+}
+
+.farewell-glow-ring {
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 60%, rgba(0, 192, 181, 0.3) 100%);
+  box-shadow: 0 0 30px rgba(0, 192, 181, 0.3), 0 0 60px rgba(0, 192, 181, 0.15);
+  animation: farewell-glow 3s ease-in-out infinite;
+}
+
+.farewell-pixel-duotone {
+  image-rendering: pixelated;
+  filter: grayscale(1) contrast(1.3) brightness(1.1);
+}
