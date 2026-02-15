@@ -70,6 +70,7 @@ export function FarewellPlanes() {
     let destIdx = Math.floor(Math.random() * DESTINATIONS.length);
 
     function spawnPlane() {
+      if (!container) return;
       const dest = DESTINATIONS[destIdx % DESTINATIONS.length];
       destIdx++;
 
